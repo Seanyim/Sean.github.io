@@ -3530,7 +3530,7 @@ input, select, textarea {
 		left: 0;
 		overflow-x: hidden;
 		overflow-y: auto;
-		position: fixed;
+		position: absolute;
 		text-align: right;
 		top: 0;
 		width: 18em;
