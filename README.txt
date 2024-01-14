@@ -1,7 +1,7 @@
 Solid State by HTML5 UP
 html5up.net | @Sean 
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-
+https://seanyim.github.io/Sean.github.io/
 
 The basic theme was firstly developed by @ajlkn html5up.net, Sean as the site's owner later then 
 created avatars. The site is mastered by Sean's authorization without any other ref.
