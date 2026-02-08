@@ -59,8 +59,12 @@ a {
 }
 
 /* Transitions */
-body { opacity: 0; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-body.loaded { opacity: 1; }
+/* Transitions */
+body { 
+    opacity: 1; 
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+body.fade-out { opacity: 0; }
 
 /* Navbar - Floating Pill */
 .navbar {

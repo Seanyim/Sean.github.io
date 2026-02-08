@@ -34,7 +34,11 @@ async function loadData() {
 
     // 2. Load Static JSON (Published)
     try {
-        const response = await fetch('data/posts.json');
+        // Determine path based on location
+        const isSubPage = window.location.pathname.includes('/pages/');
+        const dataPath = isSubPage ? '../data/posts.json' : 'data/posts.json';
+        
+        const response = await fetch(dataPath);
         if (response.ok) {
             const staticData = await response.json();
             // Merge: Static first, then Local (Local might have newer stuff, but let's keep simple)
