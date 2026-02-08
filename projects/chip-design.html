@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISC-V Core | Sean's Space</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container flex justify-between items-center">
+            <a href="../index.html" class="nav-brand">Sean's Space</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#projects" class="nav-link active">Projects</a>
+                <a href="../blog.html" class="nav-link">Blog</a>
+                <a href="../microblog.html" class="nav-link">WeiBo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="section hero" style="min-height: 60vh; align-items: flex-start; padding-top: 120px;">
+        <div class="container animate-on-scroll">
+            <a href="../index.html#projects" class="btn btn-secondary" style="margin-bottom: var(--space-md); border:none; padding-left:0;">&larr; Back to Projects</a>
+            <h1 style="font-size: 4rem; margin-bottom: var(--space-sm);">RISC-V Efficient Core</h1>
+            <h2 style="font-size: 1.5rem; color: var(--color-cta); margin-bottom: var(--space-xl); font-family: 'Inter', sans-serif;">High-Performance Edge Computing Architecture</h2>
+            
+            <div class="grid grid-cols-2 gap-lg">
+                <div>
+                     <div style="height: 400px; background: #0F172A; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; border: 1px solid var(--color-secondary);">
+                        <div style="text-align: center;">
+                            <ion-icon name="hardware-chip-outline" style="font-size: 128px; color: var(--color-cta);"></ion-icon>
+                            <p style="margin-top: 20px; font-family: 'Space Grotesk'; letter-spacing: 2px;">RV64IMAC</p>
+                        </div>
+                     </div>
+                     
+                     <div style="margin-top: var(--space-xl);">
+                        <h3>Tech Stack</h3>
+                        <div class="flex gap-sm" style="flex-wrap: wrap; margin-top: var(--space-sm);">
+                            <span class="tag" style="background: var(--color-secondary); color: white;">Verilog/SystemVerilog</span>
+                            <span class="tag" style="background: var(--color-secondary); color: white;">C++</span>
+                            <span class="tag" style="background: var(--color-secondary); color: white;">FPGA (Xilinx)</span>
+                            <span class="tag" style="background: var(--color-secondary); color: white;">Chisel</span>
+                        </div>
+                     </div>
+                </div>
+                
+                <div style="padding-left: var(--space-lg);">
+                    <h3>Overview</h3>
+                    <p style="margin-bottom: var(--space-md); color: var(--color-neutral);">
+                        This project involves the design and implementation of a 5-stage pipelined RISC-V processor core. The goal was to optimize for performance-per-watt in edge AI scenarios. 
+                    </p>
+
+                    <h3>Technical Details</h3>
+                    <ul style="list-style: none; color: var(--color-neutral); margin-bottom: var(--space-lg);">
+                        <li style="margin-bottom: 8px;">✅ <strong>ISA Support</strong>: RV64IMAC (Integer, Multiply, Atomic, Compressed).</li>
+                        <li style="margin-bottom: 8px;">✅ <strong>Pipeline</strong>: 5-Stage (Fetch, Decode, Execute, Memory, Writeback) with forwarding unit.</li>
+                        <li style="margin-bottom: 8px;">✅ <strong>Branch Prediction</strong>: Dynamic 2-bit saturating counter + BTB.</li>
+                        <li style="margin-bottom: 8px;">✅ <strong>Memory System</strong>: Direct-mapped I-Cache and 2-way set-associative D-Cache.</li>
+                    </ul>
+
+                    <div style="margin-top: var(--space-xl); padding: var(--space-lg); background: white; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                         <h4 style="color: var(--color-primary);">Outcome</h4>
+                         <p style="font-size: 0.9rem; color: var(--color-neutral); margin-top: var(--space-sm);">
+                             Successfully synthesized on Xilinx Artix-7 FPGA running at 100MHz. Capable of booting custom RTOS and running quantized neural network inference.
+                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container center">
+            <p>&copy; 2026 Sean's Space.</p>
+        </div>
+    </footer>
+    
+    <script src="../js/main.js"></script>
+</body>
+</html>

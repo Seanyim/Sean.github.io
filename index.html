@@ -1,187 +1,163 @@
-<!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>SeanY</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sean's Space | Tech & Creativity</title>
+    <meta
+      name="description"
+      content="Sean's personal portfolio and blog. Sharing tech insights and creative projects."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Ionicons for better icons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <!-- Config (Local Admin Access) -->
+    <script src="js/config.js" onerror="console.warn('Config not found - running in Guest Mode')"></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container flex justify-between items-center">
+            <a href="index.html" class="nav-brand">SEAN_YIM<span style="color:var(--color-cta)">_</span></a>
+            <div class="nav-links flex items-center">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="microblog.html" class="nav-link">Transmissions</a>
+                <a href="#about" class="nav-link">Profile</a>
+                <!-- System Status Indicator (Click to Login) -->
+                <div id="sys-status" class="status-indicator" title="System Status: GUEST" onclick="openAdminModal()"></div>
+            </div>
+        </div>
+    </nav>
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<h1><a href="index.html">Main Page</a></h1>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+    <main>
+        <!-- Hero Section -->
+        <section class="section hero" style="background: url('images/hero_bg.png') center/cover no-repeat;">
+            <div class="container hero-content animate-on-scroll">
+                <h2 class="hero-subtitle" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.1em; color: rgba(255,255,255,0.7);">ARCHITECTURE. MARKETS. INTELLIGENCE.</h2>
+                <h1 class="hero-title" style="text-shadow: 0 4px 20px rgba(0,0,0,0.8); color: white;">Bridging <span style="color: var(--color-cta)">Silicon</span> & <span style="color: var(--color-cta)">Finance</span> with AI.</h1>
+                <p class="hero-desc" style="color: rgba(255,255,255,0.9); font-weight: 300; max-width: 700px;">
+                    Hi, I'm Sean. I design high-performance chips, analyze financial markets, and build intelligent systems.
+                </p>
+                <div class="flex gap-md">
+                    <a href="#projects" class="btn btn-primary">explore_projects()</a>
+                    <a href="#contact" class="btn btn-secondary" style="border-color: white; color: white;">contact_me()</a>
+                </div>
+            </div>
+        </section>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="nav">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a href="index.html">Home</a></li>
-								<!--<li><a href="generic.html">Generic</a></li>-->
-								<li><a href="elements.html">Elements</a></li>
-								<li><a href="Aboutme.html">About Me</a></li>
-								<li><a href="ArtGallery.html">Art Garllery</a></li>
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
+        <!-- About Section (Moved Up) -->
+        <section id="about" class="section" style="background-color: white;">
+            <div class="container grid grid-cols-2 gap-lg items-center">
+                <div class="about-image animate-on-scroll" style="display: flex; justify-content: center;">
+                    <img src="images/avatar_sean.png" alt="Sean's Avatar" style="width: 300px; height: 300px; border-radius: 50%; box-shadow: var(--shadow-xl); border: 4px solid white;">
+                </div>
+                <div class="about-text animate-on-scroll">
+                    <h2>Chip Designer | Investor | AI Engineer</h2>
+                    <div style="width: 60px; height: 4px; background: var(--color-cta); margin: var(--space-sm) 0 var(--space-md) 0;"></div>
+                    <p style="margin-top: var(--space-md); font-size: 1.1rem; color: var(--color-neutral);">
+                        I operate at the intersection of hardware, capital, and algorithms. My professional career is dedicated to pushing the boundaries of <strong>semiconductor architecture</strong>.
+                    </p>
+                    <p style="margin-top: var(--space-sm); font-size: 1.1rem; color: var(--color-neutral);">
+                        As a <strong>Financial Investor</strong>, I apply quantitative methods to market analysis. In my spare time, I code AI agents and explore the future of human-machine collaboration.
+                    </p>
+                    
+                    <div class="flex gap-sm" style="margin-top: var(--space-lg);">
+                         <span class="tag" style="background: var(--color-primary); color: white;">Verilog</span>
+                         <span class="tag" style="background: var(--color-primary); color: white;">Python</span>
+                         <span class="tag" style="background: var(--color-primary); color: white;">Quant</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-				<!-- Banner -->
-					<section id="banner">
-						<div class="inner">
-							<div class="logo"><span class="fas fa-microchip fa-pulse fa-spin fa-2x"></span></div>
-							<h2>Sean|Haoyue Yan</h2>
-							<p>Customized Site Initially Developed By  <a href="Aboutme.html">Sean</a></p>
-						</div>
-					</section>
+        <!-- Projects Section (Moved Down) -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Featured Projects</h2>
+                <div class="grid grid-cols-3 gap-lg" style="margin-top: var(--space-xl);">
+                    
+                    <!-- Project 1 -->
+                    <article class="card project-card animate-on-scroll">
+                        <img src="images/project_ai_dashboard.png" alt="AI Dashboard" class="project-img">
+                        <h3 class="project-title" style="margin-top: var(--space-md);">Market Alpha AI</h3>
+                        <p class="project-desc" style="color: var(--color-neutral); margin: var(--space-sm) 0;">Quantitative analysis platform using ML to detect market anomalies and sentiment.</p>
+                        <div class="project-tags">
+                            <span class="tag">AI/ML</span>
+                            <span class="tag">Finance</span>
+                        </div>
+                        <a href="projects/market-alpha.html" class="btn btn-secondary" style="margin-top: var(--space-md); width: 100%; border: 1px solid var(--color-border); font-size: 0.9rem;">View Details</a>
+                    </article>
 
-				<!-- Wrapper -->
-					<section id="wrapper">
+                    <!-- Project 2 -->
+                    <article class="card project-card animate-on-scroll" style="animation-delay: 0.2s;">
+                         <div class="project-image" style="background: linear-gradient(135deg, #0F172A 0%, #334155 100%); height: 200px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white;">
+                             <ion-icon name="hardware-chip-outline" size="large" style="font-size: 64px;"></ion-icon>
+                        </div>
+                        <h3 class="project-title" style="margin-top: var(--space-md);">RISC-V Core Design</h3>
+                        <p class="project-desc" style="color: var(--color-neutral); margin: var(--space-sm) 0;">High-efficiency processor architecture designed for edge computing applications.</p>
+                        <div class="project-tags">
+                            <span class="tag">Verilog</span>
+                            <span class="tag">FPGA</span>
+                        </div>
+                        <a href="projects/chip-design.html" class="btn btn-secondary" style="margin-top: var(--space-md); width: 100%; border: 1px solid var(--color-border); font-size: 0.9rem;">View Details</a>
+                    </article>
 
-						<!-- One -->
-							<section id="One" class="wrapper spotlight style1">
-								<div class="inner">
-									<a href="Aboutme.html" class="image left"><img src="images/Watchmen-Doctor-Manhattan-1280x720.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Sean</h2>
-										<p>Sean recieved his B.Sc degree from <a href="https://www.pdx.edu/" >Portland State University</a>, Portland, Oregon, The United States, and his M.Eng degree from <a hef="https://www.utoronto.ca/" >University of Toronto</a>, Toronto, Ontario, Canada, respectively. He is currently employed as Mixed-Signal Integrated 
-											Circuits Designer at Zhejiang University Brain-machine Intelligence Research Center for conducting Neural-Recorder and Stimulator. He has recieved mulitple Dean Lists during bachelor time, and published two conference
-											papers aimed at Machine-Learning and hardware circuits associated.  
-										</p>
-										<a href="Aboutme.html" class="special">Learn more</a>
-									</div>
-								</div>
-							</section>
-						
-						<!-- Two -->
-						<!--
-							<section id="two" class="wrapper alt spotlight style2">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Tempus adipiscing</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
-									</div>
-								</div>
-							</section>
-						-->
-						<!-- Three -->
-						<!--
-							<section id="three" class="wrapper spotlight style3">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Nullam dignissim</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
-									</div>
-								</div>
-							</section>
-						-->
-						<!-- Four -->
-							<section id="four" class="wrapper alt style1">
-								<div class="inner">
-									<h2 class="major">ART GALLERY</h2>
-									<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-									<section class="features">
-										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3 class="major">Sed feugiat lorem</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="ArtGallery.html" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3 class="major">Nisl placerat</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="ArtGallery.html" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-											<h3 class="major">Ante fermentum</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="ArtGallery.html" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-											<h3 class="major">Fusce consequat</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="ArtGallery.html" class="special">Learn more</a>
-										</article>
-									</section>
-									<ul class="actions">
-										<li><a href="ArtGallery.html" class="button">Browse All</a></li>
-									</ul>
-								</div>
-							</section>
+                    <!-- Project 3 -->
+                    <article class="card project-card animate-on-scroll" style="animation-delay: 0.4s;">
+                        <div class="project-image" style="background: var(--color-background); height: 200px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--color-neutral); border: 1px solid var(--color-border);">
+                            <ion-icon name="code-working-outline" size="large" style="font-size: 64px;"></ion-icon>
+                        </div>
+                        <h3 class="project-title" style="margin-top: var(--space-md);">Agentic Workflows</h3>
+                        <p class="project-desc" style="color: var(--color-neutral); margin: var(--space-sm) 0;">Custom large language model agents for automating complex research tasks.</p>
+                        <div class="project-tags">
+                            <span class="tag">LLM</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                         <a href="#" class="btn btn-secondary" style="margin-top: var(--space-md); width: 100%; border: 1px solid var(--color-border); font-size: 0.9rem;">View Details</a>
+                    </article>
 
-					</section>
+                </div>
+            </div>
+        </section>
+    </main>
 
-				<!-- Footer -->
-					<section id="footer">
-						<div class="inner">
-							<h2 class="major">Get in touch</h2>
-							<p>Please leave your message once you have any other concerns.</p>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="email" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="4"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-							<ul class="contact">
-								<li class="icon solid fa-home">
-									Untitled Inc<br />
-									1705SW 11th Ave #1030<br />
-									Portland, Oregon 97201-0508
-								</li>
-								<li class="icon solid fa-phone">(702) 783-7814</li>
-								<li class="icon solid fa-envelope"><a href="#">Seanyim99@gmail.com</a></li>
-								<li class="icon brands fa-twitter"><a href="#">twitter.com/Seanyan</a></li>
-								<li class="icon brands fa-facebook-f"><a href="#">facebook.com/Seanyan</a></li>
-								<li class="icon brands fa-instagram"><a href="#">instagram.com/Seanyan</a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="index.html">Sean</a></li>
-							</ul>
-						</div>
-					</section>
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#" class="footer-link"><ion-icon name="logo-github" size="large"></ion-icon></a>
+                <a href="#" class="footer-link"><ion-icon name="logo-twitter" size="large"></ion-icon></a>
+                <a href="#" class="footer-link"><ion-icon name="logo-linkedin" size="large"></ion-icon></a>
+                <a href="#" class="footer-link"><ion-icon name="mail-outline" size="large"></ion-icon></a>
+            </div>
+            <p>&copy; 2026 Sean's Space. All rights reserved.</p>
+            <div style="margin-top: var(--space-lg); opacity: 0.5;">
+                <button onclick="document.getElementById('admin-modal').classList.add('active')" style="background:none; border:none; color: inherit; cursor: pointer; font-size: 0.8rem;">[ Admin Login ]</button>
+            </div>
+        </div>
+    </footer>
 
-			</div>
+    <!-- Admin Login Modal -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <span class="close-modal" onclick="document.getElementById('admin-modal').classList.remove('active')">&times;</span>
+            <h2 style="margin-bottom: var(--space-md);">System Access</h2>
+            <input type="password" id="admin-pass" class="input" placeholder="Enter Access Code" style="margin-bottom: var(--space-md); text-align: center;">
+            <button class="btn btn-primary" onclick="attemptLogin()">Authenticate</button>
+        </div>
+    </div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+    <script src="js/main.js"></script>
+  </body>
 </html>

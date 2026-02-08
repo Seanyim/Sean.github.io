@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Alpha AI | Sean's Space</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container flex justify-between items-center">
+            <a href="../index.html" class="nav-brand">Sean's Space</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#projects" class="nav-link active">Projects</a>
+                <a href="../blog.html" class="nav-link">Blog</a>
+                <a href="../microblog.html" class="nav-link">WeiBo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="section hero" style="min-height: 60vh; align-items: flex-start; padding-top: 120px;">
+        <div class="container animate-on-scroll">
+            <a href="../index.html#projects" class="btn btn-secondary" style="margin-bottom: var(--space-md); border:none; padding-left:0;">&larr; Back to Projects</a>
+            <h1 style="font-size: 4rem; margin-bottom: var(--space-sm);">Market Alpha AI</h1>
+            <h2 style="font-size: 1.5rem; color: var(--color-cta); margin-bottom: var(--space-xl); font-family: 'Inter', sans-serif;">Quantitative Analysis & Sentiment Engine</h2>
+            
+            <div class="grid grid-cols-2 gap-lg">
+                <div>
+                     <img src="../images/project_ai_dashboard.png" alt="Market Alpha Interface" style="width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); border: 1px solid var(--color-border);">
+                     
+                     <div style="margin-top: var(--space-xl);">
+                        <h3>Tech Stack</h3>
+                        <div class="flex gap-sm" style="flex-wrap: wrap; margin-top: var(--space-sm);">
+                            <span class="tag" style="background: var(--color-secondary); color: white;">Python</span>
+                            <span class="tag" style="background: var(--color-secondary); color: white;">PyTorch</span>
+                            <span class="tag" style="background: var(--color-secondary); color: white;">FastAPI</span>
+                            <span class="tag" style="background: var(--color-secondary); color: white;">React</span>
+                             <span class="tag" style="background: var(--color-secondary); color: white;">PostgreSQL</span>
+                        </div>
+                     </div>
+                </div>
+                
+                <div style="padding-left: var(--space-lg);">
+                    <h3>Overview</h3>
+                    <p style="margin-bottom: var(--space-md); color: var(--color-neutral);">
+                        Market Alpha AI is a proprietary research tool designed to identify arbitrage opportunities in high-frequency trading markets. By combining technical indicators with sentiment analysis from news sources and social media, the system provides a holistic view of market health.
+                    </p>
+
+                    <h3>Key Features</h3>
+                    <ul style="list-style: none; color: var(--color-neutral); margin-bottom: var(--space-lg);">
+                        <li style="margin-bottom: 8px;">✅ <strong>Real-time Anomaly Detection</strong>: Identifies price deviations >3σ using LSTM networks.</li>
+                        <li style="margin-bottom: 8px;">✅ <strong>Sentiment Polarity Scoring</strong>: NLP pipeline processing 50k+ news items daily.</li>
+                        <li style="margin-bottom: 8px;">✅ <strong>Backtesting Engine</strong>: Simulate strategies against 10 years of historical tick data.</li>
+                    </ul>
+
+                    <div style="margin-top: var(--space-xl); padding: var(--space-lg); background: white; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                         <h4 style="color: var(--color-primary);">Architecture Highlight</h4>
+                         <p style="font-size: 0.9rem; color: var(--color-neutral); margin-top: var(--space-sm);">
+                             The core engine uses a distributed microservices architecture. The specialized <strong>Inference Service</strong> is optimized for low-latency (<5ms) predictions, crucial for HFT environments.
+                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container center">
+            <p>&copy; 2026 Sean's Space.</p>
+        </div>
+    </footer>
+    
+    <script src="../js/main.js"></script>
+</body>
+</html>
