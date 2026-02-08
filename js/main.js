@@ -3,20 +3,46 @@
  * Hybrid Data: data/posts.json (Static) + LocalStorage (Drafts)
  */
 
-// --- Page Transitions ---
+// --- Page Transitions & Animations ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Fade In
+    // 1. Fade In Body
     document.body.classList.add('loaded');
 
-    // Handle Link Clicks for Fade Out
+    // 2. Setup Scroll Animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                entry.target.classList.remove('hidden'); // Ensure CSS matches
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        // Progressive Enhancement: Hide via JS so they are visible if JS is disabled
+        el.classList.add('hidden'); 
+        observer.observe(el);
+    });
+
+    // 3. Handle Link Clicks for Fade Out
     document.querySelectorAll('a').forEach(anchor => {
         if (anchor.href && anchor.href.startsWith(window.location.origin) && !anchor.hash) {
             anchor.addEventListener('click', e => {
-                e.preventDefault();
-                document.body.classList.add('fade-out');
-                setTimeout(() => {
-                    window.location = anchor.href;
-                }, 400); // Match CSS transition time
+                const targetUrl = anchor.href;
+                // Check if it's a page navigation (not just a hash or file download)
+                if (targetUrl !== window.location.href) {
+                    e.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location = targetUrl;
+                    }, 400);
+                }
             });
         }
     });

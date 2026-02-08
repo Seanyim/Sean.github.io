@@ -251,10 +251,18 @@ body.fade-out { opacity: 0; }
 .mt-xl { margin-top: 60px; }
 
 /* Animations */
+/* Animations */
 .animate-on-scroll {
+    opacity: 1; /* Safety: Default to visible */
+    transform: translateY(0);
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+/* Optional: JS can add 'hidden' class to start animation if desired, 
+   but for now let's ensure visibility first. */
+.animate-on-scroll.hidden {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s, transform 0.6s;
 }
 .animate-on-scroll.visible {
     opacity: 1;
