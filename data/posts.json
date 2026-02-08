@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "id": "init_001",
+      "type": "blog",
+      "title": "Designing for the Edge: RISC-V Optimization",
+      "content": "Power efficiency is not just about process nodes. It's about architectural decisions. In my latest work on the Efficiency Core...",
+      "date": "2024-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "init_002",
+      "type": "microblog",
+      "content": "Just deployed the new sentiment analysis model. Accuracy up by 15% on volatile tickers. #Quant #AI",
+      "date": "2024-02-01T14:30:00.000Z"
+    },
+    {
+      "id": "init_003",
+      "type": "blog",
+      "title": "The Agentic Future",
+      "content": "Why multi-agent systems are the next frontier in automated research. It's not about one smart model, it's about the team.",
+      "date": "2024-02-05T09:15:00.000Z"
+    }
+  ]
+}
