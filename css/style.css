@@ -1,42 +1,46 @@
-/* Sean's Space - Design System CSS (High-Tech / Dark Mode) */
+/* Sean's Space - Design System CSS (Apple Aesthetic) */
 
-/* Fonts - Tech/Professional */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+/* Fonts - SF Pro Equivalent */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Colors - Cyber/Dark Palette */
-  --color-primary: #0F172A; /* Deep Space */
-  --color-subtle: #1E293B;  /* Lighter Space */
-  --color-neutral: #94A3B8; /* Muted Text */
+  /* Colors - Apple Style (Light/Dark adaptive concept, mainly Light/Clean here) */
+  --color-primary: #1D1D1F; /* Apple Black */
+  --color-secondary: #86868B; /* Apple Grey */
+  --color-subtle: #F5F5F7;  /* Apple Light Grey Background */
   
-  --color-cta: #0EA5E9;     /* Cyber Blue */
-  --color-cta-hover: #38BDF8;
-  --color-danger: #EF4444;
+  --color-cta: #0071E3;     /* Apple Blue */
+  --color-cta-hover: #0077ED;
   
-  --color-text: #F8FAFC;    /* Almost White */
-  --color-text-muted: #64748B;
+  --color-background: #FFFFFF; /* Pure White */
+  --color-text: #1D1D1F;
+  --color-text-muted: #86868B;
   
-  --color-border: #334155;
-  --color-border-glow: rgba(14, 165, 233, 0.5);
+  --color-border: #D2D2D7;
   
-  --bg-grid: rgba(255, 255, 255, 0.03);
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --blur-amt: 20px;
 
-  /* Spacing */
+  /* Spacing - Large and airy */
   --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 64px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 80px;
+  --space-3xl: 120px;
   
   /* Effect */
-  --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.15);
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  --radius-md: 4px; /* Sharper corners */
-  --radius-lg: 8px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-card: 0 10px 30px rgba(0,0,0,0.08); /* Soft, diffused shadow */
+  --radius-md: 12px;
+  --radius-lg: 24px; /* Large rounded corners */
+  --radius-pill: 999px;
 
   /* Animation */
-  --transition-fast: 150ms ease-out;
+  --transition-smooth: 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Physics-like ease */
 }
 
 /* Base Styles */
@@ -44,163 +48,188 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased; /* Critical for Apple look */
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--color-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--color-background);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  font-weight: 400;
   overflow-x: hidden;
-  
-  /* Cyber Grid Background */
-  background-image: 
-      linear-gradient(var(--bg-grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
-  background-size: 40px 40px;
-  min-height: 100vh;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Space Grotesk', sans-serif;
-  color: #fff;
-  letter-spacing: -0.03em;
+  font-weight: 600;
+  letter-spacing: -0.003em;
+  color: var(--color-primary);
 }
 
-code, .tag {
-    font-family: 'JetBrains Mono', monospace;
-}
+h1 { font-size: 3.5rem; letter-spacing: -0.05em; line-height: 1.08; }
+h2 { font-size: 2.5rem; letter-spacing: -0.035em; line-height: 1.1; }
+h3 { font-size: 1.5rem; }
 
-/* Navbar */
+/* Navbar - Apple Style */
 .navbar {
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border);
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1rem 0;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .nav-brand {
-    font-family: 'Space Grotesk';
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--color-cta);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
 }
 
 .nav-link {
-    color: var(--color-neutral);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 500;
-    transition: all 0.3s;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 400;
+    transition: color 0.2s ease;
 }
 
 .nav-link:hover, .nav-link.active {
-    color: var(--color-cta);
-    text-shadow: 0 0 8px var(--color-cta);
+    color: var(--color-text);
 }
 
-/* Buttons */
+/* Hero */
+.section.hero {
+    min-height: 90vh; /* Full screen impact */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Background handled in HTML for image */
+}
+
+/* Buttons - Capsule Style */
 .btn {
-    display: inline-block;
-    padding: 10px 24px;
-    border-radius: var(--radius-md);
-    font-family: 'JetBrains Mono';
-    font-size: 0.9rem;
-    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-size: 17px;
+    font-weight: 400;
     cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    text-decoration: none;
 }
 
 .btn-primary {
-    background: rgba(14, 165, 233, 0.1);
-    border: 1px solid var(--color-cta);
-    color: var(--color-cta);
+    background: var(--color-cta);
+    color: white;
+    border: none;
 }
 
 .btn-primary:hover {
-    background: var(--color-cta);
-    color: #fff;
-    box-shadow: 0 0 20px var(--color-cta);
+    background: var(--color-cta-hover);
+    transform: scale(1.02);
 }
 
 .btn-secondary {
     background: transparent;
-    border: 1px solid var(--color-border);
-    color: var(--color-neutral);
+    color: var(--color-cta);
+    border: none;
 }
 
 .btn-secondary:hover {
-    border-color: #fff;
-    color: #fff;
+    text-decoration: underline;
 }
 
-/* Cards (Glassmorphism) */
+/* Cards - Bento Grid Style */
 .card {
-    background: rgba(30, 41, 59, 0.4);
-    border: 1px solid var(--color-border);
+    background: white;
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     box-shadow: var(--shadow-card);
-    backdrop-filter: blur(4px);
-    transition: transform 0.3s, border-color 0.3s;
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+    border: 1px solid rgba(0,0,0,0.02);
+    overflow: hidden; /* For image scaling */
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-cta);
-    box-shadow: var(--shadow-glow);
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.project-img {
+    width: 80%; /* Apple style often centers smaller images in large whitespace */
+    margin: 0 auto;
+    display: block;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.5s ease;
+}
+
+.card:hover .project-img {
+    transform: translateY(-5px) scale(1.03);
 }
 
 /* Tags */
-.tag {
-    display: inline-block;
-    padding: 4px 10px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    font-size: 0.75rem;
-    color: var(--color-neutral);
-    background: rgba(0,0,0,0.2);
+.project-tags {
+    margin-top: var(--space-md);
 }
 
-/* Inputs */
+.tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--color-subtle);
+    color: var(--color-text);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    margin-right: 6px;
+    border: none;
+}
+
+/* Inputs (for admin) */
 .input {
     width: 100%;
-    padding: 12px;
-    background: rgba(0,0,0,0.3);
+    padding: 16px;
+    border-radius: 12px;
     border: 1px solid var(--color-border);
-    color: white;
-    font-family: 'JetBrains Mono';
+    background: var(--color-subtle);
+    font-size: 1rem;
     margin-bottom: var(--space-md);
+    transition: border-color 0.2s;
 }
 
 .input:focus {
     outline: none;
     border-color: var(--color-cta);
+    background: white;
 }
 
-/* Status Indicator */
-.status-indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #22c55e;
-    box-shadow: 0 0 5px #22c55e;
-    margin-left: 8px;
-    cursor: pointer;
+/* Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.status-indicator.admin {
-    background: var(--color-danger);
-    box-shadow: 0 0 5px var(--color-danger);
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
+
 
 
 a {

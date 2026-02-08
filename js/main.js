@@ -3,7 +3,7 @@
  * Uses LocalStorage for data persistence (Demo purposes)
  */
 
-const STORAGE_KEY = "seans-space-data";
+// STORAGE_KEY moved to unified config section below
 
 // --- Data Management ---
 
