@@ -1,270 +1,238 @@
-/* Sean's Space - Fashionable Tech / Industrial Minimalist Theme */
+/* Sean's Space - Modern Tech / Developer System */
 
 /* Imports */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-    /* Palette: Teenage Engineering / Braun inspired */
-    --bg-core: #080808;      /* Soft Black */
-    --bg-card: #121212;      /* Slightly lighter black */
-    --bg-highlight: #1A1A1A; /* Hover state */
+    /* Core Palette - Modern Dark Tech */
+    --bg-void: #030304;       /* Deepest Black */
+    --bg-panel: rgba(20, 20, 25, 0.4); /* Glass Panel */
+    --bg-panel-hover: rgba(30, 30, 40, 0.6);
     
-    --text-main: #E0E0E0;    /* Off-white */
-    --text-muted: #888888;   /* Industrial Grey */
-    --text-accent: #FF4D00;  /* International Orange */
+    --text-primary: #FFFFFF;
+    --text-secondary: #94A3B8;
+    --text-tertiary: #475569;
     
-    --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
-    --border-active: 1px solid rgba(255, 255, 255, 0.2);
+    /* Accents - "Electric Gradient" */
+    --accent-cyan: #06B6D4;
+    --accent-purple: #8B5CF6;
+    --accent-glow: 0 0 20px rgba(6, 182, 212, 0.3);
     
-    /* Layout */
-    --radius-sm: 4px;
-    --radius-md: 12px;       /* Smooth but distinct */
-    --space-unit: 16px;
+    /* Borders */
+    --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+    --border-glass-hover: 1px solid rgba(255, 255, 255, 0.15);
     
-    /* Typography */
-    --font-display: 'Inter', sans-serif;
-    --font-tech: 'JetBrains Mono', monospace;
+    /* Animation */
+    --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --ease-smooth: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Reset & Base */
+/* Base */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--bg-core);
-    color: var(--text-main);
-    font-family: var(--font-display);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg-void);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
     overflow-x: hidden;
 }
 
-h1, h2, h3 {
-    font-weight: 800;
-    letter-spacing: -0.04em; /* Tight display tracking */
-    color: var(--text-main);
+h1, h2, h3, h4 {
+    letter-spacing: -0.03em;
+    font-weight: 700;
 }
 
-a { 
-    color: inherit; 
-    text-decoration: none; 
-    transition: color 0.2s ease;
+code, pre, .mono {
+    font-family: 'JetBrains Mono', monospace;
 }
 
-/* Tech Specs Typography */
-.tech-font, .nav-link, .tag, .meta {
-    font-family: var(--font-tech);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.75rem;
+/* Animations */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Transitions */
-/* Transitions */
-body { 
-    opacity: 1; 
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
-body.fade-out { opacity: 0; }
 
-/* Navbar - Floating Pill */
-.navbar {
+.animate-in {
+    animation: fadeUp 0.8s var(--ease-smooth) forwards;
+    opacity: 0; /* JS handles trigger */
+}
+
+/* Components */
+
+/* 1. Glass Card */
+.glass-card {
+    background: var(--bg-panel);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--border-glass);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s var(--ease-smooth);
+}
+
+.glass-card:hover {
+    background: var(--bg-panel-hover);
+    border: var(--border-glass-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* 2. Controls / Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s var(--ease-elastic);
+    box-shadow: var(--accent-glow);
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: var(--border-glass);
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+    border-color: var(--accent-cyan);
+    color: var(--text-primary);
+}
+
+/* 3. Navigation (Floating Dock) */
+.nav-dock {
     position: fixed;
-    top: 20px;
+    bottom: 30px; /* Mac style bottom dock or top? User said top previously, but let's go Modern Tech Top-Center */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1000;
-    background: rgba(18, 18, 18, 0.8);
-    backdrop-filter: blur(12px);
-    border: var(--border-subtle);
-    border-radius: 100px;
-    padding: 8px 12px;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 8px;
     display: flex;
-    align-items: center;
     gap: 8px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-}
-
-.nav-link {
-    color: var(--text-muted);
-    padding: 8px 16px;
-    border-radius: 100px;
-    transition: all 0.2s ease;
-}
-
-.nav-link:hover, .nav-link.active {
-    background: var(--bg-highlight);
-    color: var(--text-main);
-}
-
-.nav-brand {
-    display: none; /* Minimalist: No brand in floating nav */
-}
-
-/* Hero - Structural */
-.hero {
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0 var(--space-unit);
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.hero h1 {
-    font-size: clamp(3rem, 8vw, 8rem);
-    line-height: 0.9;
-    margin-bottom: var(--space-unit);
-}
-
-.hero p {
-    font-size: 1.25rem;
-    color: var(--text-muted);
-    max-width: 500px;
-}
-
-/* Bento Grid */
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--space-unit);
-    padding: var(--space-unit);
-    max-width: 1200px;
-    margin: 0 auto 100px;
-}
-
-.bento-item {
-    background: var(--bg-card);
-    border: var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    grid-column: span 12;
-    transition: border-color 0.2s, transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 200px;
-    position: relative;
-    overflow: hidden;
-}
-
-.bento-item:hover {
-    border: var(--border-active);
-    transform: translateY(-2px);
-}
-
-@media (min-width: 768px) {
-    .col-span-4 { grid-column: span 4; }
-    .col-span-6 { grid-column: span 6; }
-    .col-span-8 { grid-column: span 8; }
-    .row-span-2 { grid-row: span 2; }
-}
-
-/* Feed / Logs */
-.log-entry {
-    border-bottom: var(--border-subtle);
-    padding: 32px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    transition: background 0.2s;
-}
-
-.log-entry:hover {
-    background: var(--bg-highlight); /* Subtle highlight strip */
-}
-
-.log-date {
-    color: var(--text-accent);
-    width: 120px;
-    flex-shrink: 0;
-}
-
-.log-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-/* Buttons (Tactical) */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    background: var(--text-accent);
-    color: #000;
-    font-family: var(--font-tech);
-    font-weight: 600;
-    border-radius: var(--radius-sm);
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.2s;
-}
-
-.btn:hover { opacity: 0.9; }
-
-.btn-secondary {
-    background: transparent;
-    border: 1px solid var(--text-muted);
-    color: var(--text-main);
-}
-
-/* Inputs & Modals */
-.input, textarea, .modal-content {
-    background: var(--bg-card);
-    border: var(--border-subtle);
-    color: var(--text-main);
-    font-family: var(--font-tech);
-}
-
-.input:focus, textarea:focus {
-    outline: none;
-    border: 1px solid var(--text-accent);
-}
-
-.modal {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(8px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-}
-.modal.active { display: flex; }
-
-.modal-content {
-    padding: 32px;
-    border-radius: var(--radius-md);
-    width: 90%;
-    max-width: 450px;
+    z-index: 1000;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
+/* Top positioning override */
+.nav-dock { top: 20px; bottom: auto; }
+
+.nav-item {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: rgba(255,255,255,0.1);
+    color: var(--text-primary);
+}
+
+/* Layouts */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Home Grid */
+.hero-section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 4rem;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+/* Developer Mode Styles */
+.admin-only {
+    display: none !important; /* Hidden by default */
+}
+
+body.dev-mode .admin-only {
+    display: flex !important; /* Visible in Dev Mode */
+}
+
+/* Inline Editors */
+[contenteditable="true"] {
+    outline: 1px dashed rgba(255,255,255,0.2);
+    padding: 4px;
+    border-radius: 4px;
+    transition: outline 0.2s;
+}
+
+[contenteditable="true"]:focus {
+    outline: 1px solid var(--accent-cyan);
+    background: rgba(6, 182, 212, 0.1);
+}
+
+/* Admin Toolbar (Floating) */
+#admin-toolbar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #111;
+    border: 1px solid var(--accent-purple);
+    padding: 10px;
+    border-radius: 12px;
+    display: none; /* Toggled by JS class */
+    z-index: 2000;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+    flex-direction: column;
+    gap: 8px;
+}
+
+body.dev-mode #admin-toolbar { display: flex; }
+
+/* Modals */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+.modal.visible { display: flex; animation: fadeUp 0.3s ease; }
+
 /* Utilities */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.flex-col { display: flex; flex-direction: column; }
-.gap-lg { gap: 24px; }
-.mt-xl { margin-top: 60px; }
-
-/* Animations */
-/* Animations */
-.animate-on-scroll {
-    opacity: 1; /* Safety: Default to visible */
-    transform: translateY(0);
-    transition: opacity 0.6s, transform 0.6s;
-}
-
-/* Optional: JS can add 'hidden' class to start animation if desired, 
-   but for now let's ensure visibility first. */
-.animate-on-scroll.hidden {
-    opacity: 0;
-    transform: translateY(20px);
-}
-.animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

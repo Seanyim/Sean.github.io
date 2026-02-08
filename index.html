@@ -3,96 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEAN_YIM</title>
+    <title>SEAN // DEV</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <!-- Config & Main -->
+    
+    <!-- Logic -->
     <script src="js/config.js"></script>
+    <script src="js/admin.js"></script> <!-- Admin Logic -->
     <script src="js/main.js" defer></script>
 </head>
-<body class="home-page">
+<body>
     
-    <!-- Floating Pill Nav -->
-    <nav class="navbar animate-on-scroll">
-        <a href="#projects" class="nav-link">PROJECTS</a>
-        <a href="pages/blog.html" class="nav-link">LOGS</a>
-        <a href="pages/microblog.html" class="nav-link">FEED</a>
-        <a href="#about" class="nav-link">INFO</a>
+    <!-- Floating Dock Nav -->
+    <nav class="nav-dock animate-in">
+        <a href="index.html" class="nav-item active">HOME</a>
+        <a href="pages/blog.html" class="nav-item">LOGS</a>
+        <a href="pages/microblog.html" class="nav-item">FEED</a>
+        <a href="#projects" class="nav-item">WORK</a>
     </nav>
 
-    <!-- Structural Grid Layout -->
-    <div class="bento-grid animate-on-scroll" style="padding-top: 120px;">
+    <!-- Main Views -->
+    <main class="container" style="padding-top: 100px;">
         
-        <!-- Hero Block (Big Typography) -->
-        <div class="bento-item col-span-8 row-span-2" style="background-image: url('images/fashion_hero_bg.png'); background-size: cover; background-position: center; border: none; min-height: 400px; justify-content: flex-end;">
-            <div style="background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); padding: 24px; border-radius: 8px;">
-                <h1 style="font-size: 4rem; line-height: 0.9; margin-bottom: 10px;">ENGINEERING<br>+ CAPITAL.</h1>
-                <p style="color: #E0E0E0; font-size: 1.1rem; max-width: 400px;">Designing silicon architectures and investing in deep tech futures.</p>
-            </div>
-        </div>
-
-        <!-- Identity Block -->
-        <div class="bento-item col-span-4" style="align-items: center; text-align: center; justify-content: center;">
-            <img src="images/fashion_avatar.png" alt="Sean Yim" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 16px; border: 1px solid #333;">
-            <h2 style="font-size: 1.5rem;">SEAN YIM</h2>
-            <p class="meta" style="color: var(--text-muted);">SAN FRANCISCO, CA</p>
-            <div style="margin-top: 16px;">
-                <a href="#about" class="btn btn-secondary" style="font-size: 0.7rem; padding: 8px 16px;">PROFILE</a>
-            </div>
-        </div>
-
-        <!-- Status Block -->
-        <div class="bento-item col-span-4" style="justify-content: center;">
-            <span class="meta" style="color: var(--text-accent);">● SYSTEM STATUS</span>
-            <h3 style="font-size: 2rem; margin: 10px 0;">ONLINE</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Deployment Active. All systems nominal.</p>
-        </div>
-
-        <!-- Project Alpha -->
-        <div class="bento-item col-span-6" id="projects">
-            <div class="flex justify-between items-center" style="margin-bottom: 20px;">
-                <span class="tag">FINTECH</span>
-                <span class="meta">2024</span>
-            </div>
-            <div>
-                <h3 style="font-size: 2rem; margin-bottom: 8px;">AlphaMarket</h3>
-                <p style="color: var(--text-muted);">Real-time high-frequency trading dashboard.</p>
-            </div>
-            <div style="margin-top: 24px;">
-                <a href="#" class="btn">VIEW SPECS</a>
-            </div>
-        </div>
-
-        <!-- Project Beta -->
-        <div class="bento-item col-span-6">
-            <div class="flex justify-between items-center" style="margin-bottom: 20px;">
-                <span class="tag">HARDWARE</span>
-                <span class="meta">2023</span>
-            </div>
-            <div>
-                <h3 style="font-size: 2rem; margin-bottom: 8px;">Silicon Core X</h3>
-                <p style="color: var(--text-muted);">Low-power RISC-V edge processor.</p>
-            </div>
-            <div style="margin-top: 24px;">
-                <a href="#" class="btn">VIEW SPECS</a>
-            </div>
-        </div>
-
-        <!-- About Text -->
-        <div class="bento-item col-span-12" id="about">
-            <h2 style="margin-bottom: 16px;">MANIFESTO</h2>
-            <p style="font-size: 1.5rem; line-height: 1.4; max-width: 800px; color: var(--text-muted);">
-                We are entering the <span style="color: var(--text-main);">Hardware Renaissance</span>. 
-                My work exists at the intersection of atomic precision and capital allocation. 
-                I build tools that amplify human capability and invest in founders who do the same.
+        <!-- Hero -->
+        <section class="hero-section animate-in">
+            <h1 class="hero-title editable-text" data-field="hero_title">
+                BUILDING THE<br>FUTURE.
+            </h1>
+            <p class="mono editable-text" data-field="hero_subtitle" style="color: var(--text-secondary); max-width: 500px; margin-bottom: 30px;">
+                Constructing digital architectures and investing in tomorrow's hardware.
             </p>
-        </div>
+            <div class="flex gap-2">
+                <a href="#projects" class="btn-primary">VIEW WORK</a>
+                <a href="pages/blog.html" class="btn-ghost">READ LOGS</a>
+            </div>
+        </section>
 
-    </div>
+        <!-- Projects Grid -->
+        <section id="projects" style="margin-bottom: 100px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+                <h3>PROJECTS</h3>
+                <button class="btn-ghost admin-only" onclick="addNewProject()">+ NEW PROJECT</button>
+            </div>
+            
+            <div class="bento-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <!-- Project 1 -->
+                <article class="glass-card animate-in" style="animation-delay: 0.1s;">
+                    <div style="height: 150px; background: #111; border-radius: 8px; margin-bottom: 16px; overflow: hidden; position: relative;">
+                        <!-- Placeholder for Project Image -->
+                        <div style="position: absolute; inset: 0; background: linear-gradient(45deg, var(--bg-void), var(--bg-panel));"></div>
+                    </div>
+                    <h4 class="editable-text" data-field="proj_1_title">AlphaMarket</h4>
+                    <p class="mono" style="font-size: 0.8rem; color: var(--accent-cyan); margin: 4px 0;">FINTECH / REACT</p>
+                    <p class="text-secondary editable-text" data-field="proj_1_desc" style="font-size: 0.9rem;">Real-time high-frequency trading dashboard with sub-ms latency.</p>
+                    <div class="admin-only" style="margin-top: 10px;">
+                        <button class="btn-ghost" style="font-size: 0.7rem;">EDIT DATA</button>
+                    </div>
+                </article>
 
-    <footer style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8rem; border-top: var(--border-subtle);">
-        <p class="meta">SEAN_YIM // 2024 // INDEX_ROOT</p>
+                <!-- Project 2 -->
+                <article class="glass-card animate-in" style="animation-delay: 0.2s;">
+                    <div style="height: 150px; background: #111; border-radius: 8px; margin-bottom: 16px; overflow: hidden; position: relative;">
+                         <div style="position: absolute; inset: 0; background: linear-gradient(45deg, var(--bg-void), var(--bg-panel));"></div>
+                    </div>
+                    <h4 class="editable-text" data-field="proj_2_title">Silicon Core X</h4>
+                    <p class="mono" style="font-size: 0.8rem; color: var(--accent-purple); margin: 4px 0;">HARDWARE / RISC-V</p>
+                    <p class="text-secondary editable-text" data-field="proj_2_desc" style="font-size: 0.9rem;">Low-power edge processor design for IoT applications.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- About / Info -->
+        <section id="about" class="glass-card animate-in" style="margin-bottom: 100px; padding: 40px;">
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="margin-bottom: 20px;">ABOUT</h3>
+                    <div class="editable-text" data-field="about_bio" style="color: var(--text-secondary);">
+                        <p style="margin-bottom: 16px;">We are entering the Hardware Renaissance. My work exists at the intersection of atomic precision and capital allocation.</p>
+                        <p>I focus on tools that amplify human capability.</p>
+                    </div>
+                </div>
+                <div style="width: 200px;">
+                    <h3 style="margin-bottom: 20px;">LINKS</h3>
+                    <ul class="mono" style="list-style: none; color: var(--text-secondary);">
+                        <li style="margin-bottom: 8px;"><a href="#" class="nav-item">GITHUB</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" class="nav-item">TWITTER</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" class="nav-item">EMAIL</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer style="text-align: center; padding: 40px; color: var(--text-tertiary); font-size: 0.8rem;">
+        <p class="mono">SEAN_YIM // SYSTEMS // 2024</p>
     </footer>
 
 </body>
