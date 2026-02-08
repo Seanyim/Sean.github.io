@@ -1,160 +1,99 @@
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sean's Space | Tech & Creativity</title>
-    <meta
-      name="description"
-      content="Sean's personal portfolio and blog. Sharing tech insights and creative projects."
-    />
-    <link rel="stylesheet" href="css/style.css" />
-    <!-- Ionicons for better icons -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-  </head>
-  <body>
-    <!-- Config (Local Admin Access) -->
-    <script src="js/config.js" onerror="console.warn('Config not found - running in Guest Mode')"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEAN_YIM</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Config & Main -->
+    <script src="js/config.js"></script>
     <script src="js/main.js" defer></script>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="container flex justify-between items-center" style="max-width: 1080px; margin: 0 auto; padding: 0 20px;">
-            <a href="index.html" class="nav-brand" style="color: black;">Sean's Space</a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link active">Store</a> <!-- Fun nod to Apple -->
-                <a href="#projects" class="nav-link">Mac</a>
-                <a href="blog.html" class="nav-link">iPad</a>
-                <a href="microblog.html" class="nav-link">iPhone</a>
-                <a href="#about" class="nav-link">Watch</a>
-                <!-- Renaming for concept, but keeping functionality -->
-                <!-- Use JS to fix links or keep simple -->
-            </div>
-            <!-- REAL LINKS -->
-            <div class="nav-links">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="blog.html" class="nav-link">Blog</a>
-                <a href="microblog.html" class="nav-link">Updates</a>
-                <a href="#about" class="nav-link">About</a>
-            </div>
-        </div>
+<body class="home-page">
+    
+    <!-- Floating Pill Nav -->
+    <nav class="navbar animate-on-scroll">
+        <a href="#projects" class="nav-link">PROJECTS</a>
+        <a href="blog.html" class="nav-link">LOGS</a>
+        <a href="microblog.html" class="nav-link">FEED</a>
+        <a href="#about" class="nav-link">INFO</a>
     </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="section hero" style="background: url('images/apple_hero_bg.png') center/cover no-repeat;">
-            <div class="container hero-content animate-on-scroll" style="text-align: center;">
-                <h1 class="hero-title" style="color: black; margin-bottom: var(--space-sm);">Think Different. <br>Design Future.</h1>
-                <p class="hero-desc" style="color: var(--color-text-muted); font-size: 1.5rem; max-width: 600px; margin: 0 auto; font-weight: 400;">
-                    Chip Architecture. Financial Intelligence. Agentic AI.
-                </p>
-                <div class="flex gap-md" style="justify-content: center; margin-top: var(--space-lg);">
-                    <a href="#projects" class="btn btn-primary">Learn more ></a>
-                    <a href="#contact" class="btn btn-secondary">Contact me ></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="section" style="background-color: var(--color-subtle);">
-            <div class="container grid grid-cols-2 gap-2xl items-center" style="max-width: 1080px;">
-                <div class="about-image animate-on-scroll">
-                    <!-- Clean simple image, no borders -->
-                    <img src="images/apple_avatar.png" alt="Sean's Avatar" style="width: 100%; max-width: 400px; border-radius: var(--radius-lg); box-shadow: var(--shadow-card);">
-                </div>
-                <div class="about-text animate-on-scroll">
-                    <h2 style="font-size: 3rem; margin-bottom: var(--space-md);">Precision in every transaction.</h2>
-                    <p style="font-size: 1.25rem; color: var(--color-text-muted); font-weight: 400; line-height: 1.6;">
-                        I design silicon that powers the world and algorithms that navigate its markets. My work blends the microscopic precision of hardware manufacturing with the macroscopic vision of financial investing.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="container" style="max-width: 1080px;">
-                <h2 class="section-title animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">Selected Work.</h2>
-                <div class="grid grid-cols-2 gap-lg">
-                    
-                    <!-- Market Alpha (Large) -->
-                    <article class="card project-card animate-on-scroll" style="grid-column: span 2; background: #F5F5F7;">
-                        <div class="grid grid-cols-2 gap-lg items-center">
-                            <div style="padding: var(--space-xl);">
-                                <span class="tag" style="background: white; margin-bottom: var(--space-sm);">AI / Finance</span>
-                                <h3 class="project-title" style="font-size: 2.5rem; margin-bottom: var(--space-sm);">Market Alpha.</h3>
-                                <p class="project-desc" style="font-size: 1.1rem; color: var(--color-text-muted);">A pro-grade sentiment engine.</p>
-                                <a href="projects/market-alpha.html" class="btn btn-secondary" style="margin-top: var(--space-md); padding-left: 0;">See the analysis ></a>
-                            </div>
-                            <img src="images/apple_project_alpha.png" alt="AI Dashboard" class="project-img" style="width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
-                        </div>
-                    </article>
-
-                    <!-- RISC-V Core -->
-                    <article class="card project-card animate-on-scroll" style="background: white; text-align: center;">
-                        <div style="padding: var(--space-lg);">
-                             <h3 class="project-title">Silicon Core.</h3>
-                             <p class="project-desc" style="color: var(--color-text-muted);">RISC-V Architecture.</p>
-                        </div>
-                        <img src="images/apple_project_core.png" alt="Chip Design" class="project-img" style="width: 70%;">
-                        <div style="padding: var(--space-lg);">
-                            <a href="projects/chip-design.html" class="btn btn-secondary">View Specs ></a>
-                        </div>
-                    </article>
-
-                    <!-- Agentic Workflow -->
-                    <article class="card project-card animate-on-scroll" style="background: black; color: white; text-align: center;">
-                        <div style="padding: var(--space-lg);">
-                             <h3 class="project-title" style="color: white;">Flow.</h3>
-                             <p class="project-desc" style="color: #86868b;">Autonomous Agents.</p>
-                        </div>
-                        <!-- Abstract or Icon -->
-                        <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
-                            <ion-icon name="infinite-outline" style="font-size: 80px; color: white; opacity: 0.8;"></ion-icon>
-                        </div>
-                        <div style="padding: var(--space-lg);">
-                            <a href="#" class="btn btn-secondary" style="color: white;">Learn more ></a>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-links">
-                <a href="#" class="footer-link"><ion-icon name="logo-github" size="large"></ion-icon></a>
-                <a href="#" class="footer-link"><ion-icon name="logo-twitter" size="large"></ion-icon></a>
-                <a href="#" class="footer-link"><ion-icon name="logo-linkedin" size="large"></ion-icon></a>
-                <a href="#" class="footer-link"><ion-icon name="mail-outline" size="large"></ion-icon></a>
-            </div>
-            <p>&copy; 2026 Sean's Space. All rights reserved.</p>
-            <div style="margin-top: var(--space-lg); opacity: 0.5;">
-                <button onclick="document.getElementById('admin-modal').classList.add('active')" style="background:none; border:none; color: inherit; cursor: pointer; font-size: 0.8rem;">[ Admin Login ]</button>
+    <!-- Structural Grid Layout -->
+    <div class="bento-grid animate-on-scroll" style="padding-top: 120px;">
+        
+        <!-- Hero Block (Big Typography) -->
+        <div class="bento-item col-span-8 row-span-2" style="background-image: url('images/fashion_hero_bg.png'); background-size: cover; background-position: center; border: none; min-height: 400px; justify-content: flex-end;">
+            <div style="background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); padding: 24px; border-radius: 8px;">
+                <h1 style="font-size: 4rem; line-height: 0.9; margin-bottom: 10px;">ENGINEERING<br>+ CAPITAL.</h1>
+                <p style="color: #E0E0E0; font-size: 1.1rem; max-width: 400px;">Designing silicon architectures and investing in deep tech futures.</p>
             </div>
         </div>
-    </footer>
 
-    <!-- Admin Login Modal -->
-    <div id="admin-modal" class="modal">
-        <div class="modal-content" style="max-width: 400px; text-align: center;">
-            <span class="close-modal" onclick="document.getElementById('admin-modal').classList.remove('active')">&times;</span>
-            <h2 style="margin-bottom: var(--space-md);">System Access</h2>
-            <input type="password" id="admin-pass" class="input" placeholder="Enter Access Code" style="margin-bottom: var(--space-md); text-align: center;">
-            <button class="btn btn-primary" onclick="attemptLogin()">Authenticate</button>
+        <!-- Identity Block -->
+        <div class="bento-item col-span-4" style="align-items: center; text-align: center; justify-content: center;">
+            <img src="images/fashion_avatar.png" alt="Sean Yim" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 16px; border: 1px solid #333;">
+            <h2 style="font-size: 1.5rem;">SEAN YIM</h2>
+            <p class="meta" style="color: var(--text-muted);">SAN FRANCISCO, CA</p>
+            <div style="margin-top: 16px;">
+                <a href="#about" class="btn btn-secondary" style="font-size: 0.7rem; padding: 8px 16px;">PROFILE</a>
+            </div>
         </div>
+
+        <!-- Status Block -->
+        <div class="bento-item col-span-4" style="justify-content: center;">
+            <span class="meta" style="color: var(--text-accent);">● SYSTEM STATUS</span>
+            <h3 style="font-size: 2rem; margin: 10px 0;">ONLINE</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Deployment Active. All systems nominal.</p>
+        </div>
+
+        <!-- Project Alpha -->
+        <div class="bento-item col-span-6" id="projects">
+            <div class="flex justify-between items-center" style="margin-bottom: 20px;">
+                <span class="tag">FINTECH</span>
+                <span class="meta">2024</span>
+            </div>
+            <div>
+                <h3 style="font-size: 2rem; margin-bottom: 8px;">AlphaMarket</h3>
+                <p style="color: var(--text-muted);">Real-time high-frequency trading dashboard.</p>
+            </div>
+            <div style="margin-top: 24px;">
+                <a href="#" class="btn">VIEW SPECS</a>
+            </div>
+        </div>
+
+        <!-- Project Beta -->
+        <div class="bento-item col-span-6">
+            <div class="flex justify-between items-center" style="margin-bottom: 20px;">
+                <span class="tag">HARDWARE</span>
+                <span class="meta">2023</span>
+            </div>
+            <div>
+                <h3 style="font-size: 2rem; margin-bottom: 8px;">Silicon Core X</h3>
+                <p style="color: var(--text-muted);">Low-power RISC-V edge processor.</p>
+            </div>
+            <div style="margin-top: 24px;">
+                <a href="#" class="btn">VIEW SPECS</a>
+            </div>
+        </div>
+
+        <!-- About Text -->
+        <div class="bento-item col-span-12" id="about">
+            <h2 style="margin-bottom: 16px;">MANIFESTO</h2>
+            <p style="font-size: 1.5rem; line-height: 1.4; max-width: 800px; color: var(--text-muted);">
+                We are entering the <span style="color: var(--text-main);">Hardware Renaissance</span>. 
+                My work exists at the intersection of atomic precision and capital allocation. 
+                I build tools that amplify human capability and invest in founders who do the same.
+            </p>
+        </div>
+
     </div>
 
-    <script src="js/main.js"></script>
-  </body>
+    <footer style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8rem; border-top: var(--border-subtle);">
+        <p class="meta">SEAN_YIM // 2024 // INDEX_ROOT</p>
+    </footer>
+
+</body>
 </html>

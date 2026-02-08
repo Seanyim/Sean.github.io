@@ -3,237 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Updates - Sean's Space</title>
+    <title>FEED // SEAN_YIM</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <style>
-        .microblog-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .input-area {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-md);
-            margin-bottom: var(--space-2xl);
-            position: relative;
-        }
-
-        .input-area textarea {
-            width: 100%;
-            border: none;
-            resize: none;
-            outline: none;
-            font-size: 1.1rem;
-            min-height: 100px;
-            font-family: 'Quicksand', sans-serif;
-            color: var(--color-text);
-            margin-bottom: var(--space-md);
-        }
-
-        .input-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--color-border);
-            padding-top: var(--space-md);
-        }
-
-        .action-icons {
-            display: flex;
-            gap: var(--space-md);
-            color: var(--color-cta);
-            font-size: 1.5rem;
-        }
-
-        .action-icon {
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .action-icon:hover {
-            transform: scale(1.1);
-        }
-
-        /* Feed Styles */
-        .feed-stream {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-lg);
-        }
-
-        .weibo-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            border: 1px solid var(--color-border);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .weibo-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .weibo-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-md);
-        }
-
-        .avatar {
-            width: 48px;
-            height: 48px;
-            background-color: var(--color-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        .user-info h4 {
-            font-size: 1rem;
-            margin: 0;
-            color: var(--color-primary);
-        }
-
-        .timestamp {
-            font-size: 0.8rem;
-            color: var(--color-text-muted);
-        }
-
-        .weibo-content {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: var(--space-md);
-            white-space: pre-wrap; /* Preserve line breaks */
-        }
-        
-        .weibo-media {
-            margin-top: var(--space-md);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            max-width: 100%;
-        }
-
-        .weibo-media img {
-            max-width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: var(--radius-md);
-        }
-
-        .weibo-footer {
-            display: flex;
-            gap: var(--space-xl);
-            padding-top: var(--space-sm);
-            border-top: 1px solid var(--color-background); /* Subtle divider */
-            color: var(--color-text-muted);
-        }
-        
-        .interaction-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .interaction-btn:hover {
-            color: var(--color-cta);
-        }
-    </style>
+    <!-- Config & Main -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js" defer></script>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="container flex justify-between items-center">
-            <a href="index.html" class="nav-brand">Sean's Space</a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="index.html#projects" class="nav-link">Projects</a>
-                <a href="blog.html" class="nav-link">Blog</a>
-                <a href="microblog.html" class="nav-link active">WeiBo</a>
-                <a href="index.html#about" class="nav-link">About</a>
-            </div>
-        </div>
+<body class="microblog-page">
+    
+    <!-- Floating Pill Nav -->
+    <nav class="navbar animate-on-scroll">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="index.html#projects" class="nav-link">PROJECTS</a>
+        <a href="blog.html" class="nav-link">LOGS</a>
+        <a href="microblog.html" class="nav-link active">FEED</a>
+        <a href="index.html#about" class="nav-link">INFO</a>
     </nav>
 
-    <main class="container section" style="padding-top: 100px;">
-        <div class="microblog-container">
-            
-            <!-- Input Area -->
-            <div class="input-area">
-                <textarea id="weibo-input" placeholder="What's happening? Share a thought, a link, or a moment..."></textarea>
-                <div class="input-actions">
-                    <div class="action-icons">
-                        <div class="action-icon" title="Add Image" onclick="insertImageToWeibo()"><ion-icon name="image-outline"></ion-icon></div>
-                        <div class="action-icon" title="Add Link" onclick="insertLinkToWeibo()"><ion-icon name="link-outline"></ion-icon></div>
-                        <!-- Emoji picker trigger could go here -->
-                        <div class="action-icon" title="Emoji" onclick="insertEmoji()"><ion-icon name="happy-outline"></ion-icon></div>
-                    </div>
-                    <button class="btn btn-primary" onclick="publishWeibo()">Post</button>
-                </div>
-            </div>
+    <main class="container" style="max-width: 600px; padding-top: 120px; padding-bottom: 100px;">
+        <header class="page-header animate-on-scroll" style="margin-bottom: var(--space-2xl); border-bottom: 2px solid var(--text-main); padding-bottom: 20px;">
+            <h1 style="font-size: 3rem; margin-bottom: 0;">FEED.</h1>
+            <p class="tech-font" style="color: var(--text-muted); margin-top: 5px;">LIVE_STREAM // THOUGHTS_IN_FLUX</p>
+        </header>
 
-            <!-- Feed Stream -->
-            <div id="weibo-feed" class="feed-stream">
-                <!-- Posts will be injected here by JS -->
-                 <div class="weibo-card">
-                    <div class="weibo-header">
-                        <div class="avatar">S</div>
-                        <div class="user-info">
-                            <h4>Sean</h4>
-                            <span class="timestamp">Just now</span>
-                        </div>
-                    </div>
-                    <div class="weibo-content">Refactoring the codebase for the new Valuation Model. It's surprisingly therapeutic to delete legacy code. 🧹✨ #coding #refactor</div>
-                    <div class="weibo-footer">
-                        <span class="interaction-btn"><ion-icon name="chatbubble-outline"></ion-icon> 0</span>
-                        <span class="interaction-btn"><ion-icon name="heart-outline"></ion-icon> 0</span>
-                        <span class="interaction-btn"><ion-icon name="share-social-outline"></ion-icon> Share</span>
-                    </div>
-                </div>
+        <!-- Input Area (Admin Only) -->
+        <div class="input-area animate-on-scroll" style="margin-bottom: 40px; display: none; background: var(--bg-card); padding: 20px; border-radius: var(--radius-md);">
+            <p class="tech-font" style="color: var(--text-accent); margin-bottom: 10px;">BROADCAST_MESSAGE</p>
+            <textarea id="weibo-input" class="input" placeholder="Type..." rows="3"></textarea>
+            <div style="text-align: right; margin-top: 10px;">
+                <button class="btn" onclick="publishWeibo()">SEND</button>
             </div>
+        </div>
 
+        <!-- Microblog Feed -->
+        <div id="weibo-feed" class="flex-col animate-on-scroll">
+            <!-- Feed Generated by JS -->
+             <div style="text-align: center; padding: 60px; color: var(--text-muted);">
+                <ion-icon name="radio-outline" class="spin" style="font-size: 32px; margin-bottom: 10px;"></ion-icon>
+                <p class="tech-font">SCANNING...</p>
+            </div>
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-             <p>&copy; 2026 Sean's Space. All rights reserved.</p>
-        </div>
+    <footer style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8rem; border-top: var(--border-subtle);">
+        <p class="meta">SEAN_YIM // 2024 // FEED_END</p>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script>
-        // Simple helpers for the microblog input
-        function insertImageToWeibo() {
-            const url = prompt("Enter Image URL:");
-            if(url) {
-                const textarea = document.getElementById('weibo-input');
-                textarea.value += `\n![Image](${url})\n`;
-                textarea.focus();
-            }
-        }
-        function insertLinkToWeibo() {
-            const url = prompt("Enter Link URL:");
-            if(url) {
-                const textarea = document.getElementById('weibo-input');
-                textarea.value += ` ${url} `;
-                textarea.focus();
-            }
-        }
-        function insertEmoji() {
-            const textarea = document.getElementById('weibo-input');
-            textarea.value += `😊`;
-            textarea.focus();
-        }
-    </script>
 </body>
 </html>
