@@ -28,20 +28,25 @@
         
         <!-- Hero -->
         <section class="hero-section animate-in">
-            <h1 class="hero-title editable-text" data-field="hero_title">
+            <!-- Background Image -->
+            <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; opacity: 0.6; pointer-events: none;">
+                <img src="images/nano_glass_hero.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+
+            <h1 class="hero-title editable-text" data-field="hero_title" style="position: relative; z-index: 2;">
                 BUILDING THE<br>FUTURE.
             </h1>
-            <p class="mono editable-text" data-field="hero_subtitle" style="color: var(--text-secondary); max-width: 500px; margin-bottom: 30px;">
-                Constructing digital architectures and investing in tomorrow's hardware.
+            <p class="mono editable-text" data-field="hero_subtitle" style="color: var(--text-secondary); max-width: 500px; margin-bottom: 30px; position: relative; z-index: 2;">
+                I build digital architectures and invest in hardware startups.
             </p>
-            <div class="flex gap-2">
+            <div class="flex gap-2" style="position: relative; z-index: 2;">
                 <a href="#projects" class="btn-primary">VIEW WORK</a>
                 <a href="pages/blog.html" class="btn-ghost">READ LOGS</a>
             </div>
         </section>
 
         <!-- Projects Grid -->
-        <section id="projects" style="margin-bottom: 100px;">
+        <section id="projects" style="margin-bottom: 100px; position: relative; z-index: 2;">
             <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
                 <h3>PROJECTS</h3>
                 <button class="btn-ghost admin-only" onclick="addNewProject()">+ NEW PROJECT</button>
@@ -50,13 +55,15 @@
             <div class="bento-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                 <!-- Project 1 -->
                 <article class="glass-card animate-in" style="animation-delay: 0.1s;">
-                    <div style="height: 150px; background: #111; border-radius: 8px; margin-bottom: 16px; overflow: hidden; position: relative;">
-                        <!-- Placeholder for Project Image -->
-                        <div style="position: absolute; inset: 0; background: linear-gradient(45deg, var(--bg-void), var(--bg-panel));"></div>
+                    <div style="height: 180px; background: #111; border-radius: 8px; margin-bottom: 16px; overflow: hidden; position: relative;">
+                        <!-- Holographic Dashboard -->
+                        <img src="images/nano_project_holo.png" alt="AlphaMarket Dashboard" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <h4 class="editable-text" data-field="proj_1_title">AlphaMarket</h4>
                     <p class="mono" style="font-size: 0.8rem; color: var(--accent-cyan); margin: 4px 0;">FINTECH / REACT</p>
-                    <p class="text-secondary editable-text" data-field="proj_1_desc" style="font-size: 0.9rem;">Real-time high-frequency trading dashboard with sub-ms latency.</p>
+                    <p class="text-secondary editable-text" data-field="proj_1_desc" style="font-size: 0.9rem;">
+                        Real-time trading dashboard. sub-millisecond updates via WebSocket.
+                    </p>
                     <div class="admin-only" style="margin-top: 10px;">
                         <button class="btn-ghost" style="font-size: 0.7rem;">EDIT DATA</button>
                     </div>
@@ -64,24 +71,30 @@
 
                 <!-- Project 2 -->
                 <article class="glass-card animate-in" style="animation-delay: 0.2s;">
-                    <div style="height: 150px; background: #111; border-radius: 8px; margin-bottom: 16px; overflow: hidden; position: relative;">
-                         <div style="position: absolute; inset: 0; background: linear-gradient(45deg, var(--bg-void), var(--bg-panel));"></div>
+                    <div style="height: 180px; background: #111; border-radius: 8px; margin-bottom: 16px; overflow: hidden; position: relative;">
+                         <img src="images/project_chip_thumb.png" onerror="this.src='images/nano_project_holo.png'" style="width: 100%; height: 100%; object-fit: cover;" alt="Core X">
                     </div>
                     <h4 class="editable-text" data-field="proj_2_title">Silicon Core X</h4>
                     <p class="mono" style="font-size: 0.8rem; color: var(--accent-purple); margin: 4px 0;">HARDWARE / RISC-V</p>
-                    <p class="text-secondary editable-text" data-field="proj_2_desc" style="font-size: 0.9rem;">Low-power edge processor design for IoT applications.</p>
+                    <p class="text-secondary editable-text" data-field="proj_2_desc" style="font-size: 0.9rem;">
+                        Low-power edge processor for IoT. Optimized for battery life.
+                    </p>
                 </article>
             </div>
         </section>
 
         <!-- About / Info -->
-        <section id="about" class="glass-card animate-in" style="margin-bottom: 100px; padding: 40px;">
+        <section id="about" class="glass-card animate-in" style="margin-bottom: 100px; padding: 40px; position: relative; z-index: 2;">
             <div style="display: flex; gap: 40px; flex-wrap: wrap;">
                 <div style="flex: 1; min-width: 250px;">
                     <h3 style="margin-bottom: 20px;">ABOUT</h3>
                     <div class="editable-text" data-field="about_bio" style="color: var(--text-secondary);">
-                        <p style="margin-bottom: 16px;">We are entering the Hardware Renaissance. My work exists at the intersection of atomic precision and capital allocation.</p>
-                        <p>I focus on tools that amplify human capability.</p>
+                        <p style="margin-bottom: 16px;">
+                            Hardware is hard. I make tools to make it easier.
+                        </p>
+                        <p>
+                            I engineer software systems and allocate capital to founders building the physical future.
+                        </p>
                     </div>
                 </div>
                 <div style="width: 200px;">
