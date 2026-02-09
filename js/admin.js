@@ -39,6 +39,7 @@ function checkDevMode() {
 }
 
 // 2. Admin UI Injection
+// 2. Admin UI Injection
 function initAdminUI() {
     // Create Admin Toolbar if not exists
     if (!document.getElementById('admin-toolbar')) {
@@ -67,13 +68,25 @@ function makeContentEditable() {
     document.querySelectorAll('.editable-text').forEach(el => {
         el.setAttribute('contenteditable', 'true');
         el.addEventListener('blur', (e) => saveEdit(e.target));
+        // Add visual cue
+        el.style.borderBottom = '1px dashed var(--accent-cyan)';
     });
 }
 
 function injectProjectControls() {
-    // Add "Edit" buttons to existing static projects if needed, 
-    // but better to rely on rendering from JSON for full control.
-    // For now, let's just allow adding new ones which will be rendered dynamically.
+    // Add "Delete" buttons to existing static projects
+    const projects = document.querySelectorAll('#projects .glass-card, .bento-item[id*="projects"]'); // Cover both structures
+    projects.forEach((proj, index) => {
+        if(proj.querySelector('.admin-controls')) return; // Already injected
+
+        const controls = document.createElement('div');
+        controls.className = 'admin-controls';
+        controls.style.marginTop = '10px';
+        controls.innerHTML = `
+            <button class="btn-ghost" style="font-size: 0.7rem; color: #ff4444; border-color: #ff4444;" onclick="deleteProject('static_${index}')">DELETE</button>
+        `;
+        proj.appendChild(controls);
+    });
 }
 
 // --- Project Management ---
@@ -82,7 +95,7 @@ function saveNewProject() {
     const title = document.getElementById('proj-title').value;
     const desc = document.getElementById('proj-desc').value;
     const tag = document.getElementById('proj-tag').value;
-    const img = document.getElementById('proj-img').value; // URL
+    const img = document.getElementById('proj-img').value; 
 
     if(!title) return alert("Title required");
 
@@ -91,27 +104,38 @@ function saveNewProject() {
         title,
         desc,
         tag,
-        image: img || 'images/project_fintech_thumb.png', // Default
-        year: new Date().getFullYear()
+        image: img || 'images/project_fintech_thumb.png', 
+        year: new Date().getFullYear(),
+        isLocal: true
     };
 
     // Save to LocalStorage
     const localData = getLocalData();
     if (!localData.projects) localData.projects = [];
-    localData.projects.push(newProject);
+    localData.projects.unshift(newProject); // Add to top
     saveLocalData(localData);
 
-    // Refresh Grid (Simplified: Reload page)
-    window.location.reload();
+    // Refresh Grid
+    window.location.reload(); 
 }
 
 function deleteProject(id) {
     if(!confirm("Delete this project?")) return;
+    
     const localData = getLocalData();
-    if(localData.projects) {
-        localData.projects = localData.projects.filter(p => p.id !== id);
+    if (id.startsWith('static_')) {
+        // Handle static deletion (hide it via a 'deleted_static' list)
+        if (!localData.deletedStatic) localData.deletedStatic = [];
+        localData.deletedStatic.push(id);
         saveLocalData(localData);
         window.location.reload();
+    } else {
+        // Handle dynamic deletion
+        if(localData.projects) {
+            localData.projects = localData.projects.filter(p => p.id !== id);
+            saveLocalData(localData);
+            window.location.reload();
+        }
     }
 }
 
