@@ -45,23 +45,90 @@ function initAdminUI() {
         const toolbar = document.createElement('div');
         toolbar.id = 'admin-toolbar';
         toolbar.innerHTML = `
-            <div class="mono" style="color:var(--accent-purple); font-size: 0.8rem;">DEV_MODE</div>
-            <button class="btn-ghost" onclick="exportData()">💾 Save JSON</button>
-            <button class="btn-ghost" onclick="logout()">🔒 Logout</button>
+            <div class="mono" style="color:var(--accent-purple); font-size: 0.8rem; margin-bottom:8px;">DEV_MODE</div>
+            <button class="btn-ghost" style="width:100%; margin-bottom:4px;" onclick="exportData()">💾 Save JSON</button>
+            <button class="btn-ghost" style="width:100%; margin-bottom:4px;" onclick="document.getElementById('project-modal').classList.add('visible')">➕ Project</button>
+            <button class="btn-ghost" style="width:100%;" onclick="logout()">🔒 Logout</button>
         `;
         document.body.appendChild(toolbar);
     }
 
     // Make elements editable
     makeContentEditable();
+    
+    // Inject Project Controls if on Home
+    if (document.querySelector('.bento-grid')) {
+        injectProjectControls();
+    }
 }
 
 function makeContentEditable() {
-    // About Me
+    // About Me & existing elements
     document.querySelectorAll('.editable-text').forEach(el => {
         el.setAttribute('contenteditable', 'true');
         el.addEventListener('blur', (e) => saveEdit(e.target));
     });
+}
+
+function injectProjectControls() {
+    // Add "Edit" buttons to existing static projects if needed, 
+    // but better to rely on rendering from JSON for full control.
+    // For now, let's just allow adding new ones which will be rendered dynamically.
+}
+
+// --- Project Management ---
+
+function saveNewProject() {
+    const title = document.getElementById('proj-title').value;
+    const desc = document.getElementById('proj-desc').value;
+    const tag = document.getElementById('proj-tag').value;
+    const img = document.getElementById('proj-img').value; // URL
+
+    if(!title) return alert("Title required");
+
+    const newProject = {
+        id: 'proj_' + Date.now(),
+        title,
+        desc,
+        tag,
+        image: img || 'images/project_fintech_thumb.png', // Default
+        year: new Date().getFullYear()
+    };
+
+    // Save to LocalStorage
+    const localData = getLocalData();
+    if (!localData.projects) localData.projects = [];
+    localData.projects.push(newProject);
+    saveLocalData(localData);
+
+    // Refresh Grid (Simplified: Reload page)
+    window.location.reload();
+}
+
+function deleteProject(id) {
+    if(!confirm("Delete this project?")) return;
+    const localData = getLocalData();
+    if(localData.projects) {
+        localData.projects = localData.projects.filter(p => p.id !== id);
+        saveLocalData(localData);
+        window.location.reload();
+    }
+}
+
+// --- Helpers ---
+
+function getLocalData() {
+    return JSON.parse(localStorage.getItem('seans_space_data_v3') || '{"posts":[], "projects":[]}');
+}
+
+function saveLocalData(data) {
+    localStorage.setItem('seans_space_data_v3', JSON.stringify(data));
+}
+
+// Emoji Picker (Simple prompt for now, enhanced later)
+function insertEmoji() {
+    const emoji = prompt("Enter Emoji (Win+. / Cmd+Ctrl+Space):", "🚀");
+    if(emoji) document.execCommand('insertText', false, emoji);
 }
 
 // 3. Persistence (Simulation)
