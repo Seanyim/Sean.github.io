@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero section-header">
+    <div class="container">
+        <h1>Tweets</h1>
+        <p class="lead">Quick thoughts and updates.</p>
+    </div>
+</section>
+
+<div class="container" style="max-width: 600px;">
+    {% for tweet in tweets %}
+    <div class="tweet-card">
+        <div class="tweet-header">
+            <div class="tweet-avatar">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="tweet-meta">
+                <span class="tweet-name">{{ profile.name }}</span>
+                <span class="tweet-date">{{ tweet.date }}</span>
+            </div>
+        </div>
+        <div class="tweet-content">{{ tweet.content }}</div>
+    </div>
+    {% endfor %}
+
+    {% if not tweets %}
+    <div style="text-align: center; padding: 4rem 0; color: var(--color-text-secondary);">
+        <p>No tweets yet. Stay tuned!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

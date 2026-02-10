@@ -1,0 +1,341 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero section-header" style="padding-bottom: 2rem;">
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <p class="lead">Manage your content directly from here.</p>
+    </div>
+</section>
+
+<div class="container" style="max-width: 900px; padding-bottom: 4rem;">
+    
+    <!-- Tabs -->
+    <div class="tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
+        <button class="tab-btn active" onclick="showTab('profile')">Profile</button>
+        <button class="tab-btn" onclick="showTab('blogs')">Blogs</button>
+        <button class="tab-btn" onclick="showTab('projects')">Projects</button>
+        <button class="tab-btn" onclick="showTab('tweets')">Tweets</button>
+    </div>
+
+    <!-- PROFILE EDITOR -->
+    <div id="tab-profile" class="tab-content">
+        <form id="profile-form" class="card">
+            <h3 style="margin-bottom: 1.5rem;">Edit Profile</h3>
+            
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" value="{{ profile.name }}" class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label>Tagline</label>
+                <input type="text" name="tagline" value="{{ profile.tagline }}" class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label>About</label>
+                <textarea name="about" class="form-input" rows="4">{{ profile.about }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Avatar URL (optional)</label>
+                <input type="text" name="avatar_url" value="{{ profile.avatar_url or '' }}" class="form-input">
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>GitHub URL</label>
+                    <input type="text" name="github_link" value="{{ profile.github_link }}" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>LinkedIn URL</label>
+                    <input type="text" name="linkedin_link" value="{{ profile.linkedin_link }}" class="form-input">
+                </div>
+            </div>
+
+            <button type="button" onclick="saveProfile()" class="btn">Save Profile</button>
+        </form>
+    </div>
+
+    <!-- BLOGS EDITOR -->
+    <div id="tab-blogs" class="tab-content" style="display:none;">
+        <div class="card" style="margin-bottom: 2rem;">
+            <h3>Add New Blog</h3>
+            <div class="form-group">
+                <input type="text" id="new-blog-title" placeholder="Title" class="form-input">
+            </div>
+            <div class="form-group">
+                <textarea id="new-blog-content" placeholder="Content..." class="form-input" rows="3"></textarea>
+            </div>
+            <button onclick="addBlog()" class="btn">Add Post</button>
+        </div>
+
+        <div id="blogs-list">
+            {% for blog in blogs %}
+            <div class="card blog-item" data-id="{{ blog.id }}">
+                <div class="flex-between">
+                    <input type="text" value="{{ blog.title }}" class="form-input blog-title-edit" style="font-weight:bold;">
+                    <input type="date" value="{{ blog.date }}" class="form-input blog-date-edit" style="width: auto;">
+                </div>
+                <textarea class="form-input blog-content-edit" style="margin-top: 1rem;" rows="3">{{ blog.content }}</textarea>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <button onclick="deleteBlog(this)" class="btn-text danger">Delete</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button onclick="saveBlogs()" class="btn" style="margin-top: 2rem; width: 100%;">Save All Changes</button>
+    </div>
+
+    <!-- PROJECTS EDITOR -->
+    <div id="tab-projects" class="tab-content" style="display:none;">
+        <div class="card" style="margin-bottom: 2rem;">
+            <h3>Add Project</h3>
+            <input type="text" id="new-proj-title" placeholder="Project Title" class="form-input" style="margin-bottom: 0.5rem;">
+            <input type="text" id="new-proj-desc" placeholder="Short Description" class="form-input" style="margin-bottom: 0.5rem;">
+            <button onclick="addProject()" class="btn">Add Project</button>
+        </div>
+
+        <div id="projects-list">
+            {% for proj in projects %}
+            <div class="card proj-item" data-id="{{ proj.id }}">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" value="{{ proj.title }}" class="form-input proj-title-edit">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" value="{{ proj.description }}" class="form-input proj-desc-edit">
+                </div>
+                <div class="form-group">
+                    <label>Link</label>
+                    <input type="text" value="{{ proj.link }}" class="form-input proj-link-edit">
+                </div>
+                <div class="form-group">
+                    <label>Details (Markdown)</label>
+                    <textarea class="form-input proj-details-edit" rows="4">{{ proj.details }}</textarea>
+                </div>
+                <div style="text-align: right;">
+                    <button onclick="deleteProject(this)" class="btn-text danger">Delete</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button onclick="saveProjects()" class="btn" style="margin-top: 2rem; width: 100%;">Save All Changes</button>
+    </div>
+
+    <!-- TWEETS EDITOR -->
+    <div id="tab-tweets" class="tab-content" style="display:none;">
+        <div class="card" style="margin-bottom: 2rem;">
+            <h3>Post Tweet</h3>
+            <textarea id="new-tweet-content" placeholder="What's happening?" class="form-input" rows="2"></textarea>
+            <button onclick="addTweet()" class="btn">Post</button>
+        </div>
+
+        <div id="tweets-list">
+            {% for tweet in tweets %}
+            <div class="card tweet-item" data-id="{{ tweet.id }}">
+                <div class="flex-between">
+                    <span style="color: var(--color-text-secondary); font-size: 12px;">{{ tweet.date }}</span>
+                    <button onclick="deleteTweet(this)" class="btn-text danger">Delete</button>
+                </div>
+                <textarea class="form-input tweet-content-edit" style="margin-top: 0.5rem;" rows="2">{{ tweet.content }}</textarea>
+            </div>
+            {% endfor %}
+        </div>
+        <button onclick="saveTweets()" class="btn" style="margin-top: 2rem; width: 100%;">Save All Changes</button>
+    </div>
+
+</div>
+
+<script>
+// --- Styling CSS Injection ---
+const style = document.createElement('style');
+style.textContent = `
+    .form-group { margin-bottom: 1.25rem; }
+    .form-input {
+        width: 100%;
+        padding: 10px 14px;
+        background: rgba(0,0,0,0.2);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        color: var(--color-text-primary);
+        font-family: var(--font-body);
+        font-size: 15px;
+    }
+    .form-input:focus { outline: 2px solid var(--color-accent); border-color: transparent; }
+    label { display: block; margin-bottom: 0.5rem; font-size: 13px; color: var(--color-text-secondary); font-weight: 500; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .tab-btn {
+        background: none; border: none; color: var(--color-text-secondary);
+        font-family: var(--font-heading); font-weight: 600; cursor: pointer;
+        padding: 0.5rem 1rem; border-radius: 6px; transition: all 0.2s;
+    }
+    .tab-btn:hover { color: var(--color-text-primary); background: var(--color-bg-card); }
+    .tab-btn.active { color: var(--color-accent); background: rgba(34,197,94,0.1); }
+    .btn-text { background: none; border: none; cursor: pointer; font-size: 13px; }
+    .btn-text.danger { color: #ef4444; }
+    .flex-between { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+`;
+document.head.appendChild(style);
+
+// --- Tabs Logic ---
+function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+    document.getElementById('tab-' + id).style.display = 'block';
+    
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+}
+
+// --- Data Handling ---
+// Initial Data Injection from Jinja to JS not needed if we read DOM, 
+// but easier to scrape DOM for saving list items.
+
+async function saveProfile() {
+    const formData = new FormData(document.getElementById('profile-form'));
+    const data = Object.fromEntries(formData.entries());
+    
+    await fetch('/api/save/profile', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    });
+    alert('Profile Saved!');
+}
+
+async function saveBlogs() {
+    const items = [];
+    document.querySelectorAll('.blog-item').forEach(el => {
+        items.push({
+            id: parseInt(el.dataset.id),
+            title: el.querySelector('.blog-title-edit').value,
+            date: el.querySelector('.blog-date-edit').value,
+            content: el.querySelector('.blog-content-edit').value
+        });
+    });
+    
+    await fetch('/api/save/blogs', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(items)
+    });
+    alert('Blogs Update Saved!');
+}
+
+function addBlog() {
+    const title = document.getElementById('new-blog-title').value;
+    const content = document.getElementById('new-blog-content').value;
+    if(!title) return;
+    
+    // Add visually (reload page to persist effectively or implement full DOM append)
+    // For MVP, we save immediately and reload
+    const currentBlogs = Array.from(document.querySelectorAll('.blog-item')).map(el => ({
+        id: parseInt(el.dataset.id),
+        title: el.querySelector('.blog-title-edit').value,
+        date: el.querySelector('.blog-date-edit').value,
+        content: el.querySelector('.blog-content-edit').value
+    }));
+    
+    const newId = (Math.max(...currentBlogs.map(b => b.id)) || 0) + 1;
+    currentBlogs.unshift({
+        id: newId,
+        title: title,
+        date: new Date().toISOString().split('T')[0],
+        content: content
+    });
+    
+    fetch('/api/save/blogs', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(currentBlogs)
+    }).then(() => location.reload());
+}
+
+function deleteBlog(btn) {
+    if(confirm('Delete this post?')) {
+        btn.closest('.blog-item').remove();
+    }
+}
+
+// Functionality for Projects and Tweets is similar structure
+async function saveProjects() {
+    const items = [];
+    document.querySelectorAll('.proj-item').forEach(el => {
+        items.push({
+            id: parseInt(el.dataset.id),
+            title: el.querySelector('.proj-title-edit').value,
+            description: el.querySelector('.proj-desc-edit').value,
+            link: el.querySelector('.proj-link-edit').value,
+            details: el.querySelector('.proj-details-edit').value
+        });
+    });
+    await fetch('/api/save/projects', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(items)
+    });
+    alert('Projects Saved!');
+}
+
+function addProject() {
+    // Similar to addBlog
+    location.reload(); // Placeholder logic for MVP brevity, assumes user saves first
+}
+
+function deleteProject(btn) {
+    btn.closest('.proj-item').remove();
+}
+
+async function saveTweets() {
+    const items = [];
+    document.querySelectorAll('.tweet-item').forEach(el => {
+        items.push({
+            id: parseInt(el.dataset.id),
+            date: el.querySelector('.flex-between span').innerText, // Date editing simplified
+            content: el.querySelector('.tweet-content-edit').value
+        });
+    });
+    await fetch('/api/save/tweets', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(items)
+    });
+    alert('Tweets Saved!');
+}
+
+function addTweet() {
+    const content = document.getElementById('new-tweet-content').value;
+    if(!content) return;
+    
+    // Quick save implementation
+    const items = [];
+    document.querySelectorAll('.tweet-item').forEach(el => {
+        items.push({
+            id: parseInt(el.dataset.id),
+            date: el.querySelector('.flex-between span').innerText, 
+            content: el.querySelector('.tweet-content-edit').value
+        });
+    });
+    
+    const newId = (Math.max(...items.map(t => t.id)) || 0) + 1;
+    items.unshift({
+        id: newId,
+        date: new Date().toISOString().split('T')[0],
+        content: content
+    });
+    
+    fetch('/api/save/tweets', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(items)
+    }).then(() => location.reload());
+}
+
+function deleteTweet(btn) {
+    btn.closest('.tweet-item').remove();
+}
+
+</script>
+{% endblock %}

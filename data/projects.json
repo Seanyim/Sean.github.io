@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "title": "RISC-V Efficient Core",
+        "description": "High-Performance Edge Computing Architecture designed for AI inference.",
+        "image": "",
+        "link": "#",
+        "details": "### Overview\nThis project involves the design and implementation of a 5-stage pipelined RISC-V processor core. The goal was to optimize for performance-per-watt in edge AI scenarios.\n\n### Tech Stack\n- **Verilog/SystemVerilog**\n- **C++**\n- **FPGA (Xilinx)**\n- **Chisel**\n\n### Technical Details\n- **ISA Support**: RV64IMAC (Integer, Multiply, Atomic, Compressed).\n- **Pipeline**: 5-Stage (Fetch, Decode, Execute, Memory, Writeback) with forwarding unit.\n- **Branch Prediction**: Dynamic 2-bit saturating counter + BTB.\n- **Memory System**: Direct-mapped I-Cache and 2-way set-associative D-Cache.\n\n### Outcome\nSuccessfully synthesized on Xilinx Artix-7 FPGA running at 100MHz. Capable of booting custom RTOS and running quantized neural network inference."
+    },
+    {
+        "id": 2,
+        "title": "Market Alpha AI",
+        "description": "Quantitative Analysis & Sentiment Engine for high-frequency trading markets.",
+        "image": "",
+        "link": "#",
+        "details": "### Overview\nMarket Alpha AI is a proprietary research tool designed to identify arbitrage opportunities in high-frequency trading markets. By combining technical indicators with sentiment analysis from news sources and social media, the system provides a holistic view of market health.\n\n### Tech Stack\n- **Python**\n- **PyTorch**\n- **FastAPI**\n- **React**\n- **PostgreSQL**\n\n### Key Features\n- **Real-time Anomaly Detection**: Identifies price deviations >3σ using LSTM networks.\n- **Sentiment Polarity Scoring**: NLP pipeline processing 50k+ news items daily.\n- **Backtesting Engine**: Simulate strategies against 10 years of historical tick data.\n\n### Architecture Highlight\nThe core engine uses a distributed microservices architecture. The specialized **Inference Service** is optimized for low-latency (<5ms) predictions, crucial for HFT environments."
+    }
+]

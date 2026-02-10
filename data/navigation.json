@@ -1,0 +1,6 @@
+[
+    { "label": "Home", "url": "index.html", "active_match": "index" },
+    { "label": "Work", "url": "work.html", "active_match": "work" },
+    { "label": "Blogs", "url": "blogs.html", "active_match": "blogs" },
+    { "label": "Tweets", "url": "tweets.html", "active_match": "tweets" }
+]

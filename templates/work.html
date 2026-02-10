@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero section-header">
+    <div class="container">
+        <h1>My Work</h1>
+        <p class="lead">Selected projects and experiments.</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="grid">
+        {% for project in projects %}
+        <a href="{{ project.link or '#' }}" class="card" {% if project.link and project.link != '#' %}target="_blank" rel="noopener"{% endif %}>
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div class="card-title">{{ project.title }}</div>
+            <div class="card-desc">{{ project.description }}</div>
+            {% if project.details %}
+            <div class="tech-badges">
+                {% set lines = project.details.split('\n') %}
+                {% for line in lines %}
+                    {% if '**' in line and line.strip().startswith('- **') %}
+                    {% set tech = line.split('**')[1] %}
+                    <span class="badge">{{ tech }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

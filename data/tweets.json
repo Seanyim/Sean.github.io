@@ -1,0 +1,12 @@
+[
+    {
+        "id": 2,
+        "date": "2026-02-10",
+        "content": "this is my first tweet here!"
+    },
+    {
+        "id": 1,
+        "date": "2026-02-10",
+        "content": "Hello World from Streamlit!"
+    }
+]

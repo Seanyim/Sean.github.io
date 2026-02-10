@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero section-header">
+    <div class="container">
+        <h1>Blog</h1>
+        <p class="lead">Thoughts on technology and design.</p>
+    </div>
+</section>
+
+<div class="container" style="max-width: 760px;">
+    {% for blog in blogs %}
+    <div class="blog-card">
+        <div class="blog-date">{{ blog.date }}</div>
+        <div class="blog-title">{{ blog.title }}</div>
+        <div class="blog-excerpt">{{ blog.content }}</div>
+    </div>
+    {% endfor %}
+
+    {% if not blogs %}
+    <div style="text-align: center; padding: 4rem 0; color: var(--color-text-secondary);">
+        <p>No posts yet. Stay tuned!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
