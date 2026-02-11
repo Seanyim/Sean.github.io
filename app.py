@@ -201,7 +201,7 @@ async def upload_avatar(file: UploadFile = File(...)):
         
     # Update profile.json to point to new avatar
     profile = load_json("profile.json")
-    profile["avatar_url"] = f"/assets/img/{filename}"
+    profile["avatar_url"] = f"/Sean.github.io/assets/img/{filename}"
     save_json("profile.json", profile)
     
     return {"url": f"/assets/img/{filename}"}
