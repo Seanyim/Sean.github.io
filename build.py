@@ -3,9 +3,9 @@ import os
 from jinja2 import Environment, FileSystemLoader
 
 # Configuration
-DATA_DIR = '../data'
+DATA_DIR = 'data'
 TEMPLATE_DIR = 'templates'
-OUTPUT_DIR = '..'
+OUTPUT_DIR = '.'
 
 def load_json(filename):
     filepath = os.path.join(DATA_DIR, filename)
