@@ -3,67 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sean Yim | Building the future with Python & Modern Web Tech.</title>
-    <meta name="description" content="Hi, I'm Sean Yim. I'm a software engineer passionate about building beautiful, functional, and scalable applications. I specialize in Python, Streamlit, and mod">
-    <link rel="stylesheet" href="assets/css/apple-style.css">
+    <title>Sean's Space</title>
+    <link rel="stylesheet" href="/assets/css/apple-style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease;
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content {
+            background: var(--color-bg-card); border: 1px solid var(--color-border);
+            border-radius: 16px; padding: 2rem; max-width: 800px; width: 100%;
+            max-height: 90vh; overflow-y: auto; position: relative;
+            transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .modal-close {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            background: rgba(255,255,255,0.1); border: none; border-radius: 50%;
+            width: 32px; height: 32px; color: var(--color-text-primary);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .modal-close:hover { background: rgba(255,255,255,0.2); }
+        
+        /* Filter Chips */
+        .filter-container { display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 1rem; margin-bottom: 2rem; -webkit-overflow-scrolling: touch; }
+        .filter-chip {
+            padding: 0.5rem 1rem; border-radius: 9999px; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--color-border); color: var(--color-text-secondary);
+            font-size: 14px; cursor: pointer; white-space: nowrap; transition: all 0.2s;
+        }
+        .filter-chip:hover, .filter-chip.active {
+            background: rgba(34,197,94,0.15); color: var(--color-accent); border-color: var(--color-accent);
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-content">
-            
-            <a href="index.html" class="nav-link ">
-                Home
-            </a>
-            
-            <a href="work.html" class="nav-link ">
-                Work
-            </a>
-            
-            <a href="blogs.html" class="nav-link ">
-                Blogs
-            </a>
-            
-            <a href="tweets.html" class="nav-link active">
-                Tweets
-            </a>
-            
+        <div class="nav-container">
+            <!-- Logo Removed as per user request -->
+            <!-- <a href="/" class="nav-logo">...</a> -->
+            <div class="nav-links">
+                <a href="/" class="nav-link ">Home</a>
+                <a href="/work" class="nav-link ">Work</a>
+                <a href="/blogs" class="nav-link ">Blogs</a>
+                <a href="/tweets" class="nav-link active">Tweets</a>
+            </div>
         </div>
     </nav>
 
-    <main>
+    <main class="main-content">
         
 <section class="hero section-header">
     <div class="container">
         <h1>Tweets</h1>
-        <p class="lead">Quick thoughts and updates.</p>
+        <p class="lead">Short updates and random thoughts.</p>
     </div>
 </section>
 
-<div class="container" style="max-width: 600px;">
+<div class="container" style="max-width: 700px;">
+    <div class="filter-container">
+        <button class="filter-chip active" onclick="filterItems('all', '.tweet-card')">All</button>
+        
+        
+            
+                
+                <button class="filter-chip" onclick="filterItems('General', '.tweet-card')">General</button>
+            
+        
+            
+                
+                <button class="filter-chip" onclick="filterItems('Life', '.tweet-card')">Life</button>
+            
+        
+            
+        
+    </div>
+
     
-    <div class="tweet-card">
+    <div class="card tweet-card" data-category="General">
         <div class="tweet-header">
             <div class="tweet-avatar">
-                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <img src="/assets/img/avatar.png" alt="Sean Yim" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
+            <div class="tweet-meta">
+                <span class="tweet-name">Sean Yim</span>
+                <span class="tweet-date">2026-02-11 09:49</span>
+                <span style="font-size: 12px; color: var(--color-accent); margin-left: 0.5rem;">General</span>
+            </div>
+        </div>
+        <div class="tweet-content">
+            起飞前最后推
+        </div>
+        
+    </div>
+    
+    <div class="card tweet-card" data-category="Life">
+        <div class="tweet-header">
+            <div class="tweet-avatar">
+                <img src="/assets/img/avatar.png" alt="Sean Yim" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
             </div>
             <div class="tweet-meta">
                 <span class="tweet-name">Sean Yim</span>
                 <span class="tweet-date">2026-02-10</span>
+                <span style="font-size: 12px; color: var(--color-accent); margin-left: 0.5rem;">Life</span>
             </div>
         </div>
-        <div class="tweet-content">Hello World from Streamlit!</div>
+        <div class="tweet-content">
+            this is my first tweet here!
+        </div>
+        
+    </div>
+    
+    <div class="card tweet-card" data-category="Life">
+        <div class="tweet-header">
+            <div class="tweet-avatar">
+                <img src="/assets/img/avatar.png" alt="Sean Yim" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
+            <div class="tweet-meta">
+                <span class="tweet-name">Sean Yim</span>
+                <span class="tweet-date">2026-02-10</span>
+                <span style="font-size: 12px; color: var(--color-accent); margin-left: 0.5rem;">Life</span>
+            </div>
+        </div>
+        <div class="tweet-content">
+            Hello World from Streamlit!
+        </div>
+        
     </div>
     
 
     
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    function showTweetDetail(btn) {
+        const fullContent = btn.nextElementSibling;
+        const rawMarkdown = fullContent.querySelector('.markdown-body').innerText;
+        const htmlContent = fullContent.innerHTML.replace(rawMarkdown, marked.parse(rawMarkdown));
+        openModal(htmlContent);
+    }
+</script>
+
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Sean Yim. Crafted with precision.</p>
+            <p>&copy; 2026 Sean Yim. Crafted with ❤️ and Python.</p>
         </div>
     </footer>
+
+    <!-- Global Modal -->
+    <div id="modal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-body">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(contentHtml) {
+            const modal = document.getElementById('modal');
+            const body = document.getElementById('modal-body');
+            body.innerHTML = contentHtml;
+            modal.style.display = 'flex';
+            requestAnimationFrame(() => modal.classList.add('active'));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget && !event.target.classList.contains('modal-close')) return;
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Filter Logic
+        function filterItems(category, itemSelector) {
+            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            if(event) event.target.classList.add('active');
+            
+            const items = document.querySelectorAll(itemSelector);
+            items.forEach(item => {
+                const itemCat = item.dataset.category;
+                if (category === 'all' || itemCat === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

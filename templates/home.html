@@ -5,9 +5,13 @@
     <div class="hero-glow"></div>
     <div class="container">
         <!-- Avatar -->
+        {% if profile.avatar_url %}
+        <img src="{{ profile.avatar_url }}" alt="{{ profile.name }}" class="avatar-hero-img">
+        {% else %}
         <div class="avatar">
-            <span class="avatar-text">S</span>
+            <span class="avatar-text">{{ profile.name[0] }}</span>
         </div>
+        {% endif %}
 
         <h1>{{ profile.name }}</h1>
         <p class="lead">{{ profile.tagline }}</p>

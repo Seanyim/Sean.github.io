@@ -3,198 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sean Yim | Building the future with Python & Modern Web Tech.</title>
-    <meta name="description" content="Hi, I'm Sean Yim. I'm a software engineer passionate about building beautiful, functional, and scalable applications. I specialize in Python, Streamlit, and mod">
-    <link rel="stylesheet" href="assets/css/apple-style.css">
+    <title>Sean's Space</title>
+    <link rel="stylesheet" href="/assets/css/apple-style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease;
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content {
+            background: var(--color-bg-card); border: 1px solid var(--color-border);
+            border-radius: 16px; padding: 2rem; max-width: 800px; width: 100%;
+            max-height: 90vh; overflow-y: auto; position: relative;
+            transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .modal-close {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            background: rgba(255,255,255,0.1); border: none; border-radius: 50%;
+            width: 32px; height: 32px; color: var(--color-text-primary);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .modal-close:hover { background: rgba(255,255,255,0.2); }
+        
+        /* Filter Chips */
+        .filter-container { display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 1rem; margin-bottom: 2rem; -webkit-overflow-scrolling: touch; }
+        .filter-chip {
+            padding: 0.5rem 1rem; border-radius: 9999px; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--color-border); color: var(--color-text-secondary);
+            font-size: 14px; cursor: pointer; white-space: nowrap; transition: all 0.2s;
+        }
+        .filter-chip:hover, .filter-chip.active {
+            background: rgba(34,197,94,0.15); color: var(--color-accent); border-color: var(--color-accent);
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-content">
-            
-            <a href="index.html" class="nav-link ">
-                Home
-            </a>
-            
-            <a href="work.html" class="nav-link active">
-                Work
-            </a>
-            
-            <a href="blogs.html" class="nav-link ">
-                Blogs
-            </a>
-            
-            <a href="tweets.html" class="nav-link ">
-                Tweets
-            </a>
-            
+        <div class="nav-container">
+            <!-- Logo Removed as per user request -->
+            <!-- <a href="/" class="nav-logo">...</a> -->
+            <div class="nav-links">
+                <a href="/" class="nav-link ">Home</a>
+                <a href="/work" class="nav-link active">Work</a>
+                <a href="/blogs" class="nav-link ">Blogs</a>
+                <a href="/tweets" class="nav-link ">Tweets</a>
+            </div>
         </div>
     </nav>
 
-    <main>
+    <main class="main-content">
         
 <section class="hero section-header">
     <div class="container">
-        <h1>My Work</h1>
-        <p class="lead">Selected projects and experiments.</p>
+        <h1>Selected Work</h1>
+        <p class="lead">A collection of projects and experiments.</p>
     </div>
 </section>
 
+<style>
+    .category-section { margin-bottom: 4rem; }
+    .category-title { 
+        font-size: 1.5rem; 
+        color: var(--color-text-primary); 
+        margin-bottom: 2rem; 
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .category-icon-header { color: #22c55e; }
+    
+    /* Auto-Avatar SVGs defined as macros or variables not easy in Jinja loop without defining first.
+       We will do inline conditional logic for icons. 
+    */
+    
+    /* Ensure modal is perfectly centered */
+    .project-modal {
+        inset: 0;
+        margin: auto;
+        position: fixed;
+        max-width: 800px;
+        width: 90%;
+        max-height: 90vh; /* Allow it to fit */
+    }
+</style>
+
 <div class="container">
-    <div class="grid">
+    <!-- Filter Chips -->
+    <div class="filter-container" style="margin-bottom: 2rem;">
+        <button class="filter-chip active" onclick="filterSections('all', this)">All</button>
         
-        <a href="#" class="card" >
-            <div class="card-icon">
-                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
-            <div class="card-title">RISC-V Efficient Core</div>
-            <div class="card-desc">High-Performance Edge Computing Architecture designed for AI inference.</div>
-            
-            <div class="tech-badges">
-                
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                    
-                    <span class="badge">Verilog/SystemVerilog</span>
-                    
-                
-                    
-                    
-                    <span class="badge">C++</span>
-                    
-                
-                    
-                    
-                    <span class="badge">FPGA (Xilinx)</span>
-                    
-                
-                    
-                    
-                    <span class="badge">Chisel</span>
-                    
-                
-                    
-                
-                    
-                
-                    
-                    
-                    <span class="badge">ISA Support</span>
-                    
-                
-                    
-                    
-                    <span class="badge">Pipeline</span>
-                    
-                
-                    
-                    
-                    <span class="badge">Branch Prediction</span>
-                    
-                
-                    
-                    
-                    <span class="badge">Memory System</span>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            </div>
-            
-        </a>
         
-        <a href="#" class="card" >
-            <div class="card-icon">
-                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
-            <div class="card-title">Market Alpha AI</div>
-            <div class="card-desc">Quantitative Analysis & Sentiment Engine for high-frequency trading markets.</div>
-            
-            <div class="tech-badges">
-                
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                    
-                    <span class="badge">Python</span>
-                    
-                
-                    
-                    
-                    <span class="badge">PyTorch</span>
-                    
-                
-                    
-                    
-                    <span class="badge">FastAPI</span>
-                    
-                
-                    
-                    
-                    <span class="badge">React</span>
-                    
-                
-                    
-                    
-                    <span class="badge">PostgreSQL</span>
-                    
-                
-                    
-                
-                    
-                
-                    
-                    
-                    <span class="badge">Real-time Anomaly Detection</span>
-                    
-                
-                    
-                    
-                    <span class="badge">Sentiment Polarity Scoring</span>
-                    
-                
-                    
-                    
-                    <span class="badge">Backtesting Engine</span>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            </div>
-            
-        </a>
+            <button class="filter-chip" onclick="filterSections('CHIP', this)">CHIP</button>
+        
+            <button class="filter-chip" onclick="filterSections('Code', this)">Code</button>
         
     </div>
+
+    
+    <section class="category-section" data-category="CHIP">
+        <h2 class="category-title">
+            <!-- Icon Logic based on Category Name -->
+            <span class="category-icon-header">
+                
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                
+            </span>
+            CHIP
+        </h2>
+        
+        <div class="projects-grid">
+            
+            <article class="project-card" onclick='openProjectModal({"category": "CHIP", "description": "High-Performance Edge Computing Architecture designed for AI inference.", "details": "### Overview\nThis project involves the design and implementation of a 5-stage pipelined RISC-V processor core. The goal was to optimize for performance-per-watt in edge AI scenarios.\n\n### Tech Stack\n- **Verilog/SystemVerilog**\n- **C++**\n- **FPGA (Xilinx)**\n- **Chisel**\n\n### Technical Details\n- **ISA Support**: RV64IMAC (Integer, Multiply, Atomic, Compressed).\n- **Pipeline**: 5-Stage (Fetch, Decode, Execute, Memory, Writeback) with forwarding unit.\n- **Branch Prediction**: Dynamic 2-bit saturating counter + BTB.\n- **Memory System**: Direct-mapped I-Cache and 2-way set-associative D-Cache.\n\n### Outcome\nSuccessfully synthesized on Xilinx Artix-7 FPGA running at 100MHz. Capable of booting custom RTOS and running quantized neural network inference.", "id": 1, "link": "# CHIP", "title": "RISC-V Efficient Core"})' style="cursor: pointer;">
+                <div class="card-content">
+                    <h3 class="project-title" style="margin-top: 0;">RISC-V Efficient Core</h3>
+                    <p class="project-desc">High-Performance Edge Computing Architecture designed for AI inference.</p>
+                </div>
+            </article>
+            
+        </div>
+    </section>
+    
+    <section class="category-section" data-category="Code">
+        <h2 class="category-title">
+            <!-- Icon Logic based on Category Name -->
+            <span class="category-icon-header">
+                
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                
+            </span>
+            Code
+        </h2>
+        
+        <div class="projects-grid">
+            
+            <article class="project-card" onclick='openProjectModal({"category": "Code", "description": "Quantitative Analysis \u0026 Sentiment Engine for high-frequency trading markets.", "details": "### Overview\nMarket Alpha AI is a proprietary research tool designed to identify arbitrage opportunities in high-frequency trading markets. By combining technical indicators with sentiment analysis from news sources and social media, the system provides a holistic view of market health.\n\n### Tech Stack\n- **Python**\n- **PyTorch**\n- **FastAPI**\n- **React**\n- **PostgreSQL**\n\n### Key Features\n- **Real-time Anomaly Detection**: Identifies price deviations \u003e3\u03c3 using LSTM networks.\n- **Sentiment Polarity Scoring**: NLP pipeline processing 50k+ news items daily.\n- **Backtesting Engine**: Simulate strategies against 10 years of historical tick data.\n\n### Architecture Highlight\nThe core engine uses a distributed microservices architecture. The specialized **Inference Service** is optimized for low-latency (\u003c5ms) predictions, crucial for HFT environments.", "id": 2, "link": "#", "title": "Market Alpha AI"})' style="cursor: pointer;">
+                <div class="card-content">
+                    <h3 class="project-title" style="margin-top: 0;">Market Alpha AI</h3>
+                    <p class="project-desc">Quantitative Analysis &amp; Sentiment Engine for high-frequency trading markets.</p>
+                </div>
+            </article>
+            
+        </div>
+    </section>
+    
 </div>
+
+<!-- PROJECT DETAIL MODAL -->
+<dialog id="project-modal" class="project-modal">
+    <div class="project-modal-content">
+        <button class="project-modal-close" onclick="closeProjectModal()">&times;</button>
+        <h2 id="modal-title" style="margin-top: 0; font-size: 2rem; color: #0f172a;"></h2>
+        <div style="margin-bottom: 1rem;">
+            <span id="modal-category" class="tech-badge" style="background: #e2e8f0; color: #475569;"></span>
+        </div>
+        <div id="modal-body" style="line-height: 1.6;"></div>
+        <div style="margin-top: 2rem; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+            <a id="modal-link" href="#" target="_blank" class="btn-primary" style="display: inline-block; text-decoration: none; color: white; background: #22c55e; padding: 0.5rem 1.5rem; border-radius: 99px;">View Project</a>
+        </div>
+    </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    function openProjectModal(project) {
+        const modal = document.getElementById('project-modal');
+        document.getElementById('modal-title').textContent = project.title;
+        document.getElementById('modal-category').textContent = project.category;
+        
+        // Use Details if available, else Description. Convert newlines to <br> for simple formatting
+        // content could also be markdown if we used the editor. 
+        // Let's try to use marked if available, otherwise fallback.
+        const rawContent = project.details || project.description || "";
+        
+        if (typeof marked !== 'undefined') {
+             document.getElementById('modal-body').innerHTML = marked.parse(rawContent);
+        } else {
+             document.getElementById('modal-body').innerHTML = rawContent.replace(/\n/g, '<br>');
+        }
+
+        const linkBtn = document.getElementById('modal-link');
+        if (project.link) {
+            linkBtn.href = project.link;
+            linkBtn.style.display = 'inline-block';
+        } else {
+            linkBtn.style.display = 'none';
+        }
+
+        modal.showModal();
+    }
+
+    function closeProjectModal() {
+        const modal = document.getElementById('project-modal');
+        modal.close();
+    }
+
+    // Close on click outside
+    document.getElementById('project-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'project-modal') {
+            closeProjectModal();
+        }
+    });
+
+    function filterSections(category, btn) {
+        // Update active chip
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter sections
+        const sections = document.querySelectorAll('.category-section');
+        sections.forEach(sec => {
+            if (category === 'all' || sec.dataset.category === category) {
+                sec.style.display = 'block';
+            } else {
+                sec.style.display = 'none';
+            }
+        });
+    }
+</script>
+    <style>
+        /* ... existing styles ... */
+        .project-modal {
+            border: none;
+            border-radius: 16px;
+            padding: 0;
+            max-width: 800px;
+            width: 90%;
+            background: transparent;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .project-modal::backdrop {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+        }
+        .project-modal-content {
+            background: #ffffff; /* Explicitly White Background */
+            color: #1e293b;      /* Dark text for contrast on white */
+            padding: 2rem;
+            border-radius: 16px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .project-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+        .project-modal-close:hover { color: #0f172a; }
+    </style>
 
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Sean Yim. Crafted with precision.</p>
+            <p>&copy; 2026 Sean Yim. Crafted with ❤️ and Python.</p>
         </div>
     </footer>
+
+    <!-- Global Modal -->
+    <div id="modal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-body">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(contentHtml) {
+            const modal = document.getElementById('modal');
+            const body = document.getElementById('modal-body');
+            body.innerHTML = contentHtml;
+            modal.style.display = 'flex';
+            requestAnimationFrame(() => modal.classList.add('active'));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget && !event.target.classList.contains('modal-close')) return;
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Filter Logic
+        function filterItems(category, itemSelector) {
+            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            if(event) event.target.classList.add('active');
+            
+            const items = document.querySelectorAll(itemSelector);
+            items.forEach(item => {
+                const itemCat = item.dataset.category;
+                if (category === 'all' || itemCat === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

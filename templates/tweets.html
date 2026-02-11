@@ -4,30 +4,69 @@
 <section class="hero section-header">
     <div class="container">
         <h1>Tweets</h1>
-        <p class="lead">Quick thoughts and updates.</p>
+        <p class="lead">Short updates and random thoughts.</p>
     </div>
 </section>
 
-<div class="container" style="max-width: 600px;">
+<div class="container" style="max-width: 700px;">
+    <div class="filter-container">
+        <button class="filter-chip active" onclick="filterItems('all', '.tweet-card')">All</button>
+        {% set categories = [] %}
+        {% for t in tweets %}
+            {% if t.category and t.category not in categories %}
+                {% set _ = categories.append(t.category) %}
+                <button class="filter-chip" onclick="filterItems('{{ t.category }}', '.tweet-card')">{{ t.category }}</button>
+            {% endif %}
+        {% endfor %}
+    </div>
+
     {% for tweet in tweets %}
-    <div class="tweet-card">
+    <div class="card tweet-card" data-category="{{ tweet.category }}">
         <div class="tweet-header">
             <div class="tweet-avatar">
-                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <img src="{{ profile.avatar_url or '/assets/img/avatar-placeholder.png' }}" alt="{{ profile.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
             </div>
             <div class="tweet-meta">
                 <span class="tweet-name">{{ profile.name }}</span>
                 <span class="tweet-date">{{ tweet.date }}</span>
+                <span style="font-size: 12px; color: var(--color-accent); margin-left: 0.5rem;">{{ tweet.category }}</span>
             </div>
         </div>
-        <div class="tweet-content">{{ tweet.content }}</div>
+        <div class="tweet-content">
+            {{ tweet.content }}
+        </div>
+        {% if tweet.content|length > 200 %}
+        <button onclick="showTweetDetail(this)" class="btn-text" style="font-size: 13px; margin-top: 0.5rem; color: var(--color-accent);">Read More</button>
+        <div class="full-content" style="display: none;">
+            <div class="tweet-header">
+                <div class="tweet-avatar">...</div> <!-- Simplified avatar for modal -->
+                <div class="tweet-meta">
+                    <span class="tweet-name">{{ profile.name }}</span>
+                    <span class="tweet-date">{{ tweet.date }}</span>
+                </div>
+            </div>
+            <div class="markdown-body" style="font-size: 1.2rem; line-height: 1.6; margin-top: 1rem;">
+                {{ tweet.content }}
+            </div>
+        </div>
+        {% endif %}
     </div>
     {% endfor %}
 
     {% if not tweets %}
-    <div style="text-align: center; padding: 4rem 0; color: var(--color-text-secondary);">
-        <p>No tweets yet. Stay tuned!</p>
+    <div class="empty-state">
+        <p>No tweets yet.</p>
     </div>
     {% endif %}
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    function showTweetDetail(btn) {
+        const fullContent = btn.nextElementSibling;
+        const rawMarkdown = fullContent.querySelector('.markdown-body').innerText;
+        const htmlContent = fullContent.innerHTML.replace(rawMarkdown, marked.parse(rawMarkdown));
+        openModal(htmlContent);
+    }
+</script>
 {% endblock %}
