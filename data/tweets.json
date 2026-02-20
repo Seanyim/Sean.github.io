@@ -1,9 +1,15 @@
 [
     {
-        "id": 1770910338607,
-        "content": "working on static web turning into dynamic web",
+        "id": 1771565453016,
+        "content": "Web is now able to auto-update",
         "category": "tech",
-        "date": "2026-02-12 23:32"
+        "date": "2026-02-20 13:30"
+    },
+    {
+        "category": "tech",
+        "content": "working on static web turning into dynamic web",
+        "date": "2026-02-12 23:32",
+        "id": 1770910338607
     },
     {
         "category": "General",
