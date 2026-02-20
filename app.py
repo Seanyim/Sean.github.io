@@ -5,6 +5,8 @@ from fastapi.responses import RedirectResponse, JSONResponse
 import json
 import os
 import shutil
+import subprocess
+import threading
 from datetime import datetime
 from pydantic import BaseModel
 from typing import List, Optional
@@ -36,6 +38,26 @@ def save_json(filename, data):
         json.dump(data, f, indent=4)
     # Trigger Static Sync
     regenerate_static_site()
+    # Trigger Github Sync
+    sync_to_github(f"Update {filename} and static site")
+
+def sync_to_github(commit_message="Auto-sync from Admin panel"):
+    """Run git commands to sync changes to GitHub in a background thread."""
+    def _sync():
+        try:
+            print(f"🔄 Syncing to GitHub: {commit_message}...")
+            subprocess.run(["git", "add", "."], check=True)
+            status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+            if status.stdout.strip():
+                subprocess.run(["git", "commit", "-m", commit_message], check=True)
+                subprocess.run(["git", "push"], check=True)
+                print("✅ Successfully synced to GitHub.")
+            else:
+                print("ℹ️ No changes to sync.")
+        except Exception as e:
+            print(f"❌ Error syncing to GitHub: {e}")
+            
+    threading.Thread(target=_sync).start()
 
 def get_common_context(active_page: str):
     return {
@@ -184,6 +206,8 @@ async def upload_file(file: UploadFile = File(...)):
     with open(filepath, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
         
+    sync_to_github(f"Upload new asset: {filename}")
+        
     return {"url": f"/assets/uploads/{filename}", "filename": filename}
 
 @app.post("/api/upload/avatar")
@@ -201,7 +225,7 @@ async def upload_avatar(file: UploadFile = File(...)):
         
     # Update profile.json to point to new avatar
     profile = load_json("profile.json")
-    profile["avatar_url"] = f"/Sean.github.io/assets/img/{filename}"
+    profile["avatar_url"] = f"/assets/img/{filename}"
     save_json("profile.json", profile)
     
     return {"url": f"/assets/img/{filename}"}
